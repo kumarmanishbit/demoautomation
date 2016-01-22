@@ -21,6 +21,9 @@ public class ProcessProvider {
 		Providers providers = null;
 
 		ProviderDao providerDao = new ProviderDao();
+		
+		ProcessString processString = new ProcessString();
+		
 
 		long id = providerDao.getMaxId();
 	//	System.out.println(sourceExcel.size());
@@ -38,13 +41,15 @@ public class ProcessProvider {
 					rowExcel.getFirst_Name(), rowExcel.getGender(), rowExcel.getHospital_Name(),
 					rowExcel.getFirst_Name(), rowExcel.getLast_Name(), rowExcel.getInitials(), rowExcel.getSuffix(),
 					rowExcel.getYears_Of_Experience(), rowExcel.getProvider_Type(), rowExcel.getReview_Provider_Type());
-			query += "(" + providers.getId() + "," + providers.getProvider_type() + "," + providers.getMedical_school()
-					+ "," + providers.getMedical_school_graduation() + "," + providers.getName() + ","
-					+ providers.getBilling_unit_name() + "," + providers.getFriendly_name() + ","
-					+ providers.getGender() + ",now() , NULL , " + providers.getFacility_name() + ","
-					+ providers.getFirst_name() + "," + providers.getLast_name() + "," + providers.getInitials() + ","
-					+ providers.getSuffix() + "," + providers.getYears_of_experience() + ","
-					+ providers.getReview_provider_type() + ") ,";
+			query += "(" + providers.getId() + "," + processString.getModifiedString(providers.getProvider_type()) + ","
+					+ processString.getModifiedString(providers.getMedical_school())
+					+ "," + processString.getModifiedString(providers.getMedical_school_graduation()) + "," + 
+					processString.getModifiedString(providers.getName()) + ","
+					+ processString.getModifiedString(providers.getBilling_unit_name()) + "," + processString.getModifiedString(providers.getFriendly_name()) + ","
+					+ processString.getModifiedString(providers.getGender()) + ",now() , NULL , " + processString.getModifiedString(providers.getFacility_name()) + ","
+					+ processString.getModifiedString(providers.getFirst_name()) + "," + processString.getModifiedString(providers.getLast_name()) + "," + processString.getModifiedString(providers.getInitials()) + ","
+					+ processString.getModifiedString(providers.getSuffix()) + "," + providers.getYears_of_experience() + ","
+					+ processString.getModifiedString(providers.getReview_provider_type()) + ") ,";
 			id++;
 		}
 
