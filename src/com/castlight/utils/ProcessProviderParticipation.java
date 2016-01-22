@@ -26,15 +26,15 @@ public class ProcessProviderParticipation {
 		ProviderParticipationDao providerParticipationDao = new ProviderParticipationDao();
 
 		long id = providerParticipationDao.getMaxId();
-		
 		id++;
-		System.out.println(sourceExcel.size());
 		String query = "REPLACE INTO `provider_participations` (`id`, `provider_network_id`, `accepting_new_patients`, `primary_phone`, `provider_id`, `provider_role`, `facility`, `expired_at`, `updated_at`, `provider_location_id`) VALUES";
 
 
 		ProviderLocationDao providerLocationDao = new ProviderLocationDao();
 
-		long providerNetworkId = 0L, providerLocationId = 0;
+		ProcessString processString = new ProcessString();
+		
+		long providerNetworkId = 1589, providerLocationId = 0;
 		SourceExcel rowExcel = null;
 		Iterator<SourceExcel> iterator = sourceExcel.iterator();
 		while (iterator.hasNext()) {
@@ -43,10 +43,8 @@ public class ProcessProviderParticipation {
 			
 			providerLocationId = providerLocationDao.findProviderLocation(rowExcel.getAddress(), rowExcel.getCity(),
 					rowExcel.getZip());
-			providersParticipation = new ProviderParticipation(id, providerNetworkId, 1, rowExcel.getPhoneNumber(),
+			providersParticipation = new ProviderParticipation(id, providerNetworkId, 1, processString.getModifiedString(rowExcel.getPhoneNumber()),
 					rowExcel.getId(), "NULL", "NULL", "NULL", providerLocationId);
-
-			System.out.print(rowExcel.getAddress());
 
 			query += "(" +providersParticipation.getId() +","+providersParticipation.getProvider_network_id()+","+providersParticipation.getAccepting_new_patients()+","+providersParticipation.getPrimary_phone()+","+providersParticipation.getProvider_id()+","+providersParticipation.getProvider_role()+","+providersParticipation.getFacility()+","+providersParticipation.getExpired_at()+","+providersParticipation.getExpired_at()+","+providersParticipation.getProvider_location_id()+") ,";
 

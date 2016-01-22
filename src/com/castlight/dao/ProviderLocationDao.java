@@ -31,12 +31,9 @@ public class ProviderLocationDao {
 
 	public int findProviderLocation(String address, String city, String zip) {
 
-		System.out.println(zip);
-
 		address = address.replace("\n", "");
 		address = address.replace(",", "");
 		address = address.replace(" ", "");
-		System.out.println(address);
 
 		Statement stmt = null;
 		Connection conn = Connections.getConnection();
@@ -48,8 +45,6 @@ public class ProviderLocationDao {
 		String sql = "select id from provider_locations where zip='" + tmpzip
 				+ "' and replace(concat(COALESCE(street_address,''),COALESCE(street_address_2,''),COALESCE(city,''),COALESCE(state,''),COALESCE(zip,'')),' ','') like '%"
 				+ address + "%';";
-
-		System.out.println(sql);
 
 		try {
 			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
