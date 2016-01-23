@@ -8,7 +8,7 @@ public class Specialities {
 		return id;
 	}
 
-	public Specialities(long id, String name, Specialty_Type specialty_type, String source) {
+	public Specialities(long id, String name, String specialty_type, String source) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -36,17 +36,17 @@ public class Specialities {
 		this.source = source;
 	}
 
-	public Specialty_Type getSpecialty_type() {
+	public String getSpecialty_type() {
 		return specialty_type;
 	}
 
-	public void setSpecialty_type(Specialty_Type specialty_type) {
+	public void setSpecialty_type(String specialty_type) {
 		this.specialty_type = specialty_type;
 	}
 
 	private String name;
 
-	private Specialty_Type specialty_type;
+	private String specialty_type;
 	
 	public enum Specialty_Type {
 		medical, dental, bh_inpatient

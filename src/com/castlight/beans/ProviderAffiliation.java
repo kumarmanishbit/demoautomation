@@ -5,11 +5,10 @@ public class ProviderAffiliation {
 	private long id;
 	private long provider_id;
 	private long parent_provider_id;
-	private Affiliation_Type affiliation_type;
+	private String affiliation_type;
 
-	public ProviderAffiliation(long id, long provider_id, long parent_provider_id, Affiliation_Type affiliation_type,
+	public ProviderAffiliation(long id, long provider_id, long parent_provider_id, String affiliation_type,
 			String source) {
-		super();
 		this.id = id;
 		this.provider_id = provider_id;
 		this.parent_provider_id = parent_provider_id;
@@ -41,11 +40,11 @@ public class ProviderAffiliation {
 		this.parent_provider_id = parent_provider_id;
 	}
 
-	public Affiliation_Type getAffiliation_type() {
+	public String getAffiliation_type() {
 		return affiliation_type;
 	}
 
-	public void setAffiliation_type(Affiliation_Type affiliation_type) {
+	public void setAffiliation_type(String affiliation_type) {
 		this.affiliation_type = affiliation_type;
 	}
 
@@ -59,8 +58,6 @@ public class ProviderAffiliation {
 
 	private String source;
 
-	public enum Affiliation_Type {
-		GROUP, HOSPITAL, PRACTICE, PRACTITIONER, SOLO_PRACTICE
-	}
+  	
 
 }

@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.castlight.beans.ProviderParticipation;
 import com.castlight.beans.SourceExcel;
-import com.castlight.dao.ProviderDao;
 import com.castlight.dao.ProviderLocationDao;
 import com.castlight.dao.ProviderParticipationDao;
 import com.castlight.demo.ProcessExcel;
@@ -16,10 +15,7 @@ public class ProcessProviderParticipation {
 	public static void main(String[] args) {
 
 		List<SourceExcel> sourceExcel = new ArrayList<SourceExcel>();
-
-		ProcessExcel processExcel = new ProcessExcel();
-
-		sourceExcel = processExcel.getSourceExcelRow();
+		sourceExcel = new ProcessExcel().getSourceExcelRow();
 
 		ProviderParticipation providersParticipation = null;
 
@@ -50,11 +46,9 @@ public class ProcessProviderParticipation {
 
 			id++;
 		}
-
 		query = query.substring(0, query.length() - 1);
 		query += ";";
 		System.out.println(query);
-
 	}
 
 }
