@@ -29,7 +29,7 @@ public class ProcessProvider {
 
       SourceExcel rowExcel = null;
       Iterator<SourceExcel> iterator = sourceExcel.iterator();
-      String query = "REPLACE INTO `providers` (`id`,`provider_type`, `medical_school`, `medical_school_graduation`, `name`, `billing_unit_name`, `friendly_name`, `gender`, `created_at`, `updated_at`, `facility_name`, `first_name`, `last_name`, `initials`, `suffix`, `years_of_experience`, `review_provider_type`) VALUES ";
+      String query = "REPLACE INTO `providers` (`id`,`provider_type`, `medical_school`, `medical_school_graduation`, `name`, `billing_unit_name`, `friendly_name`, `gender`, `created_at`, `updated_at`, `facility_name`, `first_name`, `last_name`, `initials`, `suffix`, `years_of_experience`, `review_provider_type`) VALUES \n";
       while (iterator.hasNext()) {
 
          // providers = new Providers();
