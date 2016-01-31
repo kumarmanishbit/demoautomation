@@ -3,12 +3,11 @@ package pricing;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.castlight.beans.Priceable;
+
 public class PricingMongoInsert {
    public static void main(String[] args) {
       List<Priceable> priceableList = new ArrayList<Priceable>();
-      Priceable priceable = new Priceable(1, 1, 0, 0, 0, 0, 0, 0, 0);
-      priceableList.add(priceable);
-      priceableList.add(priceable);
       String mongoQuery = createMongoQuery(priceableList);
       System.out.println(mongoQuery);
    }

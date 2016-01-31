@@ -10,6 +10,7 @@ public class ProviderDao {
 	public long getMaxId() {
 		long id = 1L;
 		Statement stmt = null;
+		
 		Connection conn = Connections.getConnection();
 		String sql = "SELECT max(id) FROM Providers";
 		try {
@@ -75,7 +76,6 @@ public class ProviderDao {
 
 		String sql = "SELECT id FROM providers where name='" + hospitalName + "'";
 		
-		System.out.println(sql);
 		try {
 			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			ResultSet rs = stmt.executeQuery(sql);
@@ -98,7 +98,6 @@ public class ProviderDao {
 		String str3 = "NULL".equals(firstName) ? "initials is null" : "initials ='"+initials+"'";
 		String query = "select id from providers where " + str1 + " and " + str2 + " and " + str3;
 		
-		System.out.println(query);
 		Statement stmt = null;
 		Connection conn = Connections.getConnection();
 		Integer providerid = 0;
@@ -107,6 +106,7 @@ public class ProviderDao {
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
 				providerid = rs.getInt(1);
+				return providerid;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

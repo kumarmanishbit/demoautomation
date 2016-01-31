@@ -2,67 +2,88 @@ package com.castlight.utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import com.castlight.beans.SourceExcel;
 import com.castlight.beans.Specialities;
-import com.castlight.beans.Specialities.Specialty_Type;
 import com.castlight.dao.SpecialitiesDao;
 import com.castlight.demo.ProcessExcel;
 
 public class ProcessSpecialities {
+	
+	private Map<String,Long> speicalityNameToId = new HashMap<>();
 
-   public static void main(String[] args) {
-      ProcessSpecialities processSpecialities = new ProcessSpecialities();
-      processSpecialities.processSpeciality("medical");
-   }
+	public Map<String, Long> getSpeicalityNameTOID() {
+		return speicalityNameToId;
+	}
 
-   public String processSpeciality(String specialityType) {
-      List<SourceExcel> sourceExcel = new ArrayList<SourceExcel>();
-      ProcessExcel processExcel = new ProcessExcel();
-      sourceExcel = processExcel.getSourceExcelRow();
-      String query = process(sourceExcel,specialityType);
-      return query;
-   }
+	public void setSpeicalityNameTOID(HashMap<String, Long> speicalityNameTOID) {
+		this.speicalityNameToId = speicalityNameTOID;
+	}
 
-   public String process(List<SourceExcel> sourceExcel,String specialityType) {
-      SpecialitiesDao specialitiesDao = new SpecialitiesDao();
-      long specialitiesMaxID = specialitiesDao.getMaxId();
-      specialitiesMaxID++;
+	public static void main(String[] args) {
+		ProcessSpecialities processSpecialities = new ProcessSpecialities();
+		processSpecialities.processSpeciality("medical");
+	}
 
-      SourceExcel rowExcel = null;
-      Iterator<SourceExcel> iterator = sourceExcel.iterator();
+	public String processSpeciality(String specialityType) {
+		List<SourceExcel> sourceExcel = new ArrayList<SourceExcel>();
+		ProcessExcel processExcel = new ProcessExcel();
+		sourceExcel = processExcel.getSourceExcelRow();
+		String query = process(sourceExcel, specialityType);
+		return query;
+	}
 
-      Specialities specialities = null;
-      String query = "REPLACE INTO `specialties` (`id`, `name`, `specialty_type`, `source`, `created_at`, `updated_at`) VALUES";
-      boolean specialityPresent = false;
-      while (iterator.hasNext()) {
+	public String process(List<SourceExcel> sourceExcel, String specialityType) {
+		SpecialitiesDao specialitiesDao = new SpecialitiesDao();
+		long specialitiesMaxID = specialitiesDao.getMaxId();
+		specialitiesMaxID++;
 
-         rowExcel = iterator.next();
+		SourceExcel rowExcel = null;
+		Iterator<SourceExcel> iterator = sourceExcel.iterator();
 
-         List<String> specialitiesName = new ArrayList<String>(Arrays.asList(rowExcel.getSpecialities().split(",")));
+		Specialities specialities = null;
+		String query = "REPLACE INTO `specialties` (`id`, `name`, `specialty_type`, `source`, `created_at`, `updated_at`) VALUES \n";
 
-         for (String string : specialitiesName) {
-            if (!specialitiesDao.searchSpecialities(string.trim())) {
+		Set<String> nameOfSpecialities = new TreeSet();
 
-               specialities = new Specialities(specialitiesMaxID, string.trim(), specialityType, "NULL");
+		boolean specialityPresent = true;
+		while (iterator.hasNext()) {
 
-               query += " (" + specialities.getId() + ",'" + specialities.getName() + "','"
-                        + specialities.getSpecialty_type().toString() + "'," + specialities.getSource()
-                        + ", now() , NULL) ,";
-               specialityPresent = true;
-               specialitiesMaxID++;
-            }
-         }
-      }
+			rowExcel = iterator.next();
 
-      query = query.substring(0, query.length() - 1);
-      query += ";";
+			List<String> specialitiesName = new ArrayList<String>(
+					Arrays.asList(rowExcel.getSpecialities().split(",|\n")));
 
-      query = specialityPresent ? query : "";
-      System.out.println(query);
-      return query;
-   }
+			for (String string : specialitiesName) {
+				if (!specialitiesDao.searchSpecialities(string.trim())) {
+					nameOfSpecialities.add(string.trim());
+					specialityPresent = false;
+				}
+			}
+		}
+		
+		for(String string : nameOfSpecialities){
+			specialities = new Specialities(specialitiesMaxID, string.trim(), specialityType, "NULL");
+
+			query += " (" + specialities.getId() + ",'" + specialities.getName() + "','"
+					+ specialities.getSpecialty_type().toString() + "'," + specialities.getSource()
+					+ ", now() , NULL) \n,";
+			speicalityNameToId.put(specialities.getName(), specialities.getId());
+			specialitiesMaxID++;
+		}
+		
+		query = query.substring(0, query.length() - 1);
+		query += ";";
+		
+		query = !specialityPresent ? query : "";
+		
+		return query;
+	}
 
 }

@@ -29,6 +29,8 @@ public class ProcessProviderMetrics {
       SourceExcel rowExcel = null;
       Iterator<SourceExcel> iterator = sourceExcel.iterator();
 
+		ProcessString processString = new ProcessString();
+
       String[] metricName={"SATISFACTION_RECOMMEND_HOSPITAL","SATISFACTION_COMMUNICATION_DOCTORS","SATISFACTION_COMMUNICATION_NURSES","SATISFACTION_DISCHARGE_INSTRUCTIONS","SATISFACTION_PAIN_CONTROLLED","SATISFACTION_MEDICINES_EXPLAINED","SATISFACTION_ROOM_CLEAN","SATISFACTION_ROOM_QUIET","SATISFACTION_HELP_ASAP"};
       String query = "REPLACE INTO `provider_metrics` (`id`, `provider_id`, `metric_name`, `decimal_value`, `decimal_value_avg`, `string_value`, `sample_size`, `data_provided_by`, `data_date`, `created_at`, `updated_at`) VALUES";
       while (iterator.hasNext()) {
@@ -57,7 +59,7 @@ public class ProcessProviderMetrics {
             id++;
          }
          for (ProviderMetrics providerMetric : listProviderMetrics) {
-            query += "("+providerMetric.getId()+","+providerMetric.getProvider_id()+","+providerMetric.getMetric_name()+","+providerMetric.getDecimal_value()+","+providerMetric.getDecimal_value_avg()+","+providerMetric.getString_value()+","+providerMetric.getSample_size()+","+providerMetric.getData_provided_by()+","+providerMetric.getData_date()+", now() , NULL),";
+            query += "("+providerMetric.getId()+","+providerMetric.getProvider_id()+","+processString.getModifiedString(providerMetric.getMetric_name())+","+providerMetric.getDecimal_value()+","+providerMetric.getDecimal_value_avg()+","+processString.getModifiedString(providerMetric.getString_value())+","+processString.getModifiedString(providerMetric.getSample_size())+","+processString.getModifiedString(providerMetric.getData_provided_by())+","+processString.getModifiedString(providerMetric.getData_date())+", now() , NULL),\n";
          }
 
       }

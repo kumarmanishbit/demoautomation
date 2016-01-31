@@ -15,54 +15,58 @@ import com.castlight.demo.ProcessExcel;
 
 public class ProcessProvidersSpecialities {
 
-   public static void main(String[] args) {
-      List<SourceExcel> sourceExcel = new ArrayList<SourceExcel>();
-      
-      ProcessProvidersSpecialities providersSpecialities = new ProcessProvidersSpecialities();
+	public static void main(String[] args) {
+		List<SourceExcel> sourceExcel = new ArrayList<SourceExcel>();
 
-      ProcessExcel processExcel = new ProcessExcel();
-      sourceExcel = processExcel.getSourceExcelRow();
-      
-      providersSpecialities.process(sourceExcel);
+		ProcessProvidersSpecialities providersSpecialities = new ProcessProvidersSpecialities();
 
-   }
+		ProcessExcel processExcel = new ProcessExcel();
+		sourceExcel = processExcel.getSourceExcelRow();
 
-   public String process(List<SourceExcel> sourceExcel) {
-      SpecialitiesDao specialitiesDao = new SpecialitiesDao();
-      List<ProviderSpecialities> listOfProviderSpecialities = new ArrayList<>();
-      long id = specialitiesDao.getMaxId();
-      id++;
+		providersSpecialities.process(sourceExcel);
 
-      SourceExcel rowExcel = null;
-      Iterator<SourceExcel> iterator = sourceExcel.iterator();
-      ProviderSpecialities providerSpecialities;
-      ProviderSpecialitiesDao providerSpecialitiesDao = new ProviderSpecialitiesDao();
-      long tmpId = providerSpecialitiesDao.getMaxId();
-      tmpId++;
-      String query = "REPLACE INTO `provider_specialties` (`id`, `provider_id`, `specialty_id`, `created_at`, `updated_at`) VALUES ";
-      while (iterator.hasNext()) {
-         rowExcel = iterator.next();
-         List<String> specialitiesName = new ArrayList<String>(Arrays.asList(rowExcel.getSpecialities().split(",")));
-         List<Long> specialitiesIds = specialitiesDao.getSpecialitiesIds(specialitiesName);
+	}
 
-         for (Long specialitiesId : specialitiesIds) {
-            id++;
-            providerSpecialities = new ProviderSpecialities(id, rowExcel.getId(), specialitiesId);
-            listOfProviderSpecialities.add(providerSpecialities);
+	public String process(List<SourceExcel> sourceExcel) {
+		SpecialitiesDao specialitiesDao = new SpecialitiesDao();
+		List<ProviderSpecialities> listOfProviderSpecialities = new ArrayList<>();
+		long id = specialitiesDao.getMaxId();
+		id++;
 
-         }
+		SourceExcel rowExcel = null;
+		Iterator<SourceExcel> iterator = sourceExcel.iterator();
+		ProviderSpecialities providerSpecialities;
+		ProviderSpecialitiesDao providerSpecialitiesDao = new ProviderSpecialitiesDao();
+		long tmpId = providerSpecialitiesDao.getMaxId();
+		tmpId++;
+		String query = "REPLACE INTO `provider_specialties` (`id`, `provider_id`, `specialty_id`, `created_at`, `updated_at`) VALUES ";
+		boolean providerSpecialityPresent = false;
 
-         for (ProviderSpecialities secialities : listOfProviderSpecialities) {
-            query += "(" + tmpId + "," + secialities.getProvider_id() + "," + secialities.getSpecialty_id()
-            + ", now() , NULL),";
-            tmpId++;
-         }
+		while (iterator.hasNext()) {
+			rowExcel = iterator.next();
+			List<String> specialitiesName = new ArrayList<String>(Arrays.asList(rowExcel.getSpecialities().split(",|\n")));
+			List<Long> specialitiesIds = specialitiesDao.getSpecialitiesIds(specialitiesName);
 
-      }
+			for (Long specialitiesId : specialitiesIds) {
+				id++;
+				providerSpecialities = new ProviderSpecialities(id, rowExcel.getId(), specialitiesId);
+				listOfProviderSpecialities.add(providerSpecialities);
 
-      query = query.substring(0, query.length() - 1);
-      query += ";";
-      query = query.length()>=0 ? query : null;
-      return query;
-   }
+			}
+
+			for (ProviderSpecialities secialities : listOfProviderSpecialities) {
+				query += "(" + tmpId + "," + secialities.getProvider_id() + "," + secialities.getSpecialty_id()
+						+ ", now() , NULL),\n";
+				tmpId++;
+				providerSpecialityPresent = true;
+			}
+		}
+
+		query = query.substring(0, query.length() - 1);
+		query += ";";
+		query = providerSpecialityPresent ? query : "";
+		
+		System.out.println(query);
+		return query;
+	}
 }

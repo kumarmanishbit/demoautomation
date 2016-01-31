@@ -5,7 +5,7 @@ public class ProcessString {
 	public String getModifiedString(String inputs) {
 
 		inputs = "NULL".equalsIgnoreCase(inputs) ? inputs : "'" + inputs + "'";
-		return inputs;
+		return inputs.replaceAll("\n", "");
 	}
 
 }

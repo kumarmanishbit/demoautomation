@@ -13,7 +13,7 @@ public class ProviderLocation {
 	}
 
 	public ProviderLocation(long id, String street_address, String street_address_2, String city, String state,
-			String zip, float latitude, float longitude, String building_name) {
+			long zip, float latitude, float longitude, String building_name) {
 		super();
 		this.id = id;
 		this.street_address = street_address;
@@ -62,11 +62,11 @@ public class ProviderLocation {
 		this.state = state;
 	}
 
-	public String getZip() {
+	public long getZip() {
 		return zip;
 	}
 
-	public void setZip(String zip) {
+	public void setZip(long zip) {
 		this.zip = zip;
 	}
 
@@ -94,7 +94,7 @@ public class ProviderLocation {
 		this.building_name = building_name;
 	}
 
-	private String zip;
+	private long zip;
 	private float latitude;
 	private float longitude;
 	private String building_name;

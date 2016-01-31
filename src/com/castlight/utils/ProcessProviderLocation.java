@@ -12,7 +12,7 @@ import com.castlight.demo.ProcessExcel;
 public class ProcessProviderLocation {
 
 	public static void main(String[] args) {
-	   ProcessProviderLocation providerLocation = new ProcessProviderLocation();
+		ProcessProviderLocation providerLocation = new ProcessProviderLocation();
 		List<SourceExcel> sourceExcel = new ArrayList<SourceExcel>();
 
 		ProcessExcel processExcel = new ProcessExcel();
@@ -22,11 +22,11 @@ public class ProcessProviderLocation {
 		providerLocation.process(sourceExcel);
 	}
 
-   public String process(List<SourceExcel> sourceExcel) {
-      SourceExcel rowExcel = null;
-      Iterator<SourceExcel> iterator = sourceExcel.iterator();
-      
-      ProviderLocation providerLocation = null;
+	public String process(List<SourceExcel> sourceExcel) {
+		SourceExcel rowExcel = null;
+		Iterator<SourceExcel> iterator = sourceExcel.iterator();
+
+		ProviderLocation providerLocation = null;
 		ProviderLocationDao providerLocationDao = new ProviderLocationDao();
 		long id = providerLocationDao.getMaxId();
 		id++;
@@ -34,8 +34,10 @@ public class ProcessProviderLocation {
 		String query = "REPLACE INTO `provider_locations` (`id`, `street_address`, `street_address_2`, `city`, `state`, `zip`, `latitude`, `longitude`, `building_name`, `created_at`, `updated_at`) VALUES ";
 		ProcessString processString = new ProcessString();
 
-		long providerLocationId=0L;
+		long providerLocationId = 0L;
 		float latitude = 0.0f, longitude = 0.0f;
+
+		boolean locationPresent = true;
 		while (iterator.hasNext()) {
 			rowExcel = iterator.next();
 			providerLocation = new ProviderLocation(id, rowExcel.getAddress(), rowExcel.getAddress(),
@@ -43,23 +45,25 @@ public class ProcessProviderLocation {
 			providerLocationId = providerLocationDao.findProviderLocation(rowExcel.getAddress(), rowExcel.getCity(),
 					rowExcel.getZip());
 
-//			System.out.println("providerLocationId = "+providerLocationId);
-
-			if(providerLocationId==0)
-			query += "(" + providerLocation.getId() + "," + processString.getModifiedString(providerLocation.getStreet_address()) + ","
-					+ processString.getModifiedString(providerLocation.getStreet_address_2()) + "," + processString.getModifiedString(providerLocation.getCity()) + ","
-					+ processString.getModifiedString(providerLocation.getState()) + "," + providerLocation.getZip() + ","
-					+ providerLocation.getLatitude() + "," + providerLocation.getLongitude() + ","
-					+ processString.getModifiedString(providerLocation.getBuilding_name()) + ", now() , NULL ),";
+			if (providerLocationId == 0)
+				query += "(" + providerLocation.getId() + ","
+						+ processString.getModifiedString(providerLocation.getStreet_address()) + ","
+						+ processString.getModifiedString(providerLocation.getStreet_address_2()) + ","
+						+ processString.getModifiedString(providerLocation.getCity()) + ","
+						+ processString.getModifiedString(providerLocation.getState()) + "," + providerLocation.getZip()
+						+ "," + providerLocation.getLatitude() + "," + providerLocation.getLongitude() + ","
+						+ processString.getModifiedString(providerLocation.getBuilding_name()) + ", now() , NULL ),\n";
 			id++;
+			locationPresent = false;
 		}
 
 		query = query.substring(0, query.length() - 1);
 		query += ";";
 		System.out.println("***** \nPrivider Location Query:");
+		query = locationPresent ? query : "";
 		System.out.println(query);
-		query = query.length()>=0 ? query : null;
+
 		return query;
-   }
+	}
 
 }

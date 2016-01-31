@@ -2,6 +2,10 @@ package com.castlight.beans;
 
 public class SourceExcel {
 
+
+	private long id;
+
+	
 	public long getId() {
 		return id;
 	}
@@ -9,8 +13,6 @@ public class SourceExcel {
 	public void setId(long id) {
 		this.id = id;
 	}
-
-	private long id;
 
 	private long providerParticipaionId;
 	
@@ -32,6 +34,17 @@ public class SourceExcel {
 		this.providerLocationId = providerLocationId;
 	}
 
+	
+	private long procedureMappingId;
+	
+	public long getProcedureMappingId() {
+		return procedureMappingId;
+	}
+
+	public void setProcedureMappingId(long procedureMappingId) {
+		this.procedureMappingId = procedureMappingId;
+	}
+
 	private String Provider_Name;
 	private String First_Name;
 	private String Last_Name;
@@ -49,7 +62,7 @@ public class SourceExcel {
 	private String Address;
 	private String State;
 	private String City;
-	private String Zip;
+	private long Zip;
 	private String Distance;
 	private String PhoneNumber;
 	private String Specialities;
@@ -224,11 +237,11 @@ public class SourceExcel {
 		City = city;
 	}
 
-	public String getZip() {
+	public long getZip() {
 		return Zip;
 	}
 
-	public void setZip(String zip) {
+	public void setZip(long zip) {
 		Zip = zip;
 	}
 

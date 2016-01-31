@@ -5,7 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.castlight.utils.ProcessSpecialities;
 
 public class SpecialitiesDao {
 
@@ -33,14 +37,21 @@ public class SpecialitiesDao {
 
 		Statement stmt = null;
 		Connection conn = Connections.getConnection();
-		// String tmp = String.join(", ", specialitiesName);
 		StringBuilder sb = new StringBuilder();
 		String sep = "";
+		Map<String,Long> speicalityNameToId = new ProcessSpecialities().getSpeicalityNameTOID();
 		for (String s : specialitiesName) {
+			if(speicalityNameToId.containsKey(s))
+			{
+				listOfSpecialities.add(speicalityNameToId.get(s));
+			}
+			else {
 			sb.append(sep).append("'" + s.trim() + "'");
 			sep = ",";
+			}
 		}
 
+		 
 		// System.out.println(sb);
 		String sql = "SELECT id FROM specialties where name in (" + sb + ")";
 		try {
