@@ -19,46 +19,45 @@ public class Execution {
 	public static void main(String[] args) {
 
 		String specialityType = "medical";
-		long providerNetworkId = 0l;
-		long procedureMappingId = 0l;
+		long providerNetworkId = 9481;
+		long procedureMappingId = 6907;
 
 		StringBuilder finalQuery = new StringBuilder();
 		List<SourceExcel> sourceExcel = new ProcessExcel().getSourceExcelRow();
 		finalQuery.append("\n\n####################################### \n");
-		finalQuery.append("###################### ProcessSpecialities \n");
+		finalQuery.append("###################### Specialities \n");
 		finalQuery.append("####################################### \n");
 		finalQuery.append(new ProcessSpecialities().process(sourceExcel, specialityType) + "\n");
 		finalQuery.append("\n\n####################################### \n");
-		finalQuery.append("###################### ProcessProviderLocation \n");
+		finalQuery.append("###################### Provider Location \n");
 		finalQuery.append("####################################### \n");
 		finalQuery.append(new ProcessProviderLocation().process(sourceExcel) + "\n");
 		finalQuery.append("\n\n####################################### \n");
-		finalQuery.append("###################### ProcessProviderParticipation \n");
+		finalQuery.append("###################### Provider Participation \n");
 		finalQuery.append("####################################### \n");
 		finalQuery.append(new ProcessProviderParticipation().process(sourceExcel, providerNetworkId));
 		finalQuery.append("\n\n####################################### \n");
-		finalQuery.append("###################### ProcessProvider \n");
+		finalQuery.append("###################### Providers \n");
 		finalQuery.append("####################################### \n");
 		finalQuery.append(new ProcessProvider().process(sourceExcel) + "\n");
 		finalQuery.append("\n\n####################################### \n");
-		finalQuery.append("###################### ProcessProvidersSpecialities  \n");
+		finalQuery.append("###################### Providers Specialities  \n");
 		finalQuery.append("####################################### \n");
 		finalQuery.append(new ProcessProvidersSpecialities().process(sourceExcel) + "\n");
 		finalQuery.append("\n\n####################################### \n");
-		finalQuery.append("###################### ProcessProviderAffiliation \n");
+		finalQuery.append("###################### Provider Affiliation \n");
 		finalQuery.append("####################################### \n");
 		finalQuery.append(new ProcessProviderAffiliation().process(sourceExcel) + "\n");
 		finalQuery.append("\n\n####################################### \n");
-		finalQuery.append("###################### ProcessProviderMetrics  \n");
+		finalQuery.append("###################### Provider Metrics  \n");
 		finalQuery.append("####################################### \n");
 		finalQuery.append(new ProcessProviderMetrics().process(sourceExcel) + "\n\n\n");
 
 		finalQuery.append("\n\n####################################### \n");
-		finalQuery.append("###################### ProcessPricing \n");
+		finalQuery.append("###################### Pricing \n");
 		finalQuery.append("####################################### \n");
 		finalQuery.append(new ProcessPricing().process(sourceExcel, procedureMappingId, providerNetworkId));
 
-		//System.out.println("***********\n" + finalQuery);
 		ScriptFileGenerator fileWriter = new ScriptFileGenerator();
 		fileWriter.writeToFile(finalQuery.toString());
 	}

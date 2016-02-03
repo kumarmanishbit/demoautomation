@@ -15,16 +15,7 @@ import com.castlight.dao.SpecialitiesDao;
 import com.castlight.demo.ProcessExcel;
 
 public class ProcessSpecialities {
-	
-	private Map<String,Long> speicalityNameToId = new HashMap<>();
 
-	public Map<String, Long> getSpeicalityNameTOID() {
-		return speicalityNameToId;
-	}
-
-	public void setSpeicalityNameTOID(HashMap<String, Long> speicalityNameTOID) {
-		this.speicalityNameToId = speicalityNameTOID;
-	}
 
 	public static void main(String[] args) {
 		ProcessSpecialities processSpecialities = new ProcessSpecialities();
@@ -45,12 +36,14 @@ public class ProcessSpecialities {
 		specialitiesMaxID++;
 
 		SourceExcel rowExcel = null;
+		
+		Map<String, Long> speicalitytoId = new HashMap<>();
 		Iterator<SourceExcel> iterator = sourceExcel.iterator();
 
 		Specialities specialities = null;
 		String query = "REPLACE INTO `specialties` (`id`, `name`, `specialty_type`, `source`, `created_at`, `updated_at`) VALUES \n";
 
-		Set<String> nameOfSpecialities = new TreeSet();
+		Set<String> nameOfSpecialities = new TreeSet<String>();
 
 		boolean specialityPresent = true;
 		while (iterator.hasNext()) {
@@ -60,6 +53,8 @@ public class ProcessSpecialities {
 			List<String> specialitiesName = new ArrayList<String>(
 					Arrays.asList(rowExcel.getSpecialities().split(",|\n")));
 
+			specialitiesName.removeAll(Arrays.asList("", null));
+			
 			for (String string : specialitiesName) {
 				if (!specialitiesDao.searchSpecialities(string.trim())) {
 					nameOfSpecialities.add(string.trim());
@@ -67,22 +62,25 @@ public class ProcessSpecialities {
 				}
 			}
 		}
-		
-		for(String string : nameOfSpecialities){
+
+		for (String string : nameOfSpecialities) {
 			specialities = new Specialities(specialitiesMaxID, string.trim(), specialityType, "NULL");
 
 			query += " (" + specialities.getId() + ",'" + specialities.getName() + "','"
 					+ specialities.getSpecialty_type().toString() + "'," + specialities.getSource()
 					+ ", now() , NULL) \n,";
-			speicalityNameToId.put(specialities.getName(), specialities.getId());
+			speicalitytoId.put(specialities.getName().trim(), specialities.getId());
 			specialitiesMaxID++;
 		}
+
+		new Specialities().setSpeicalityNameTOID(speicalitytoId);
 		
-		query = query.substring(0, query.length() - 1);
+		
+		query = query.substring(0, query.length() - 2);
 		query += ";";
-		
+
 		query = !specialityPresent ? query : "";
-		
+
 		return query;
 	}
 

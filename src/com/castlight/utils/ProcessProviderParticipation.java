@@ -34,7 +34,8 @@ public class ProcessProviderParticipation {
       Iterator<SourceExcel> iterator = sourceExcel.iterator();
       String query = "REPLACE INTO `provider_participations` (`id`, `provider_network_id`, `accepting_new_patients`, `primary_phone`, `provider_id`, `provider_role`, `facility`, `expired_at`, `updated_at`, `provider_location_id`) VALUES \n";
       while (iterator.hasNext()) {
-         rowExcel = iterator.next();
+    	  rowExcel = iterator.next(); 
+         
          providerLocationId = providerLocationDao.findProviderLocation(rowExcel.getAddress(), rowExcel.getCity(),
                   rowExcel.getZip());
          providersParticipation = new ProviderParticipation(id, providerNetworkId, 1, processString.getModifiedString(rowExcel.getPhoneNumber()),
@@ -42,9 +43,8 @@ public class ProcessProviderParticipation {
          query += "(" +providersParticipation.getId() +","+providersParticipation.getProvider_network_id()+","+providersParticipation.getAccepting_new_patients()+","+providersParticipation.getPrimary_phone()+","+providersParticipation.getProvider_id()+","+providersParticipation.getProvider_role()+","+providersParticipation.getFacility()+","+providersParticipation.getExpired_at()+","+providersParticipation.getExpired_at()+","+providersParticipation.getProvider_location_id()+") \n,";
          id++;
       }
-      query = query.substring(0, query.length() - 1);
+      query = query.substring(0, query.length() - 2);
       query += ";";
-      System.out.println(query);
       return query;
    }
 }

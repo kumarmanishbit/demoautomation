@@ -1,367 +1,79 @@
 
 
 ####################################### 
-###################### ProcessSpecialities 
-####################################### 
-REPLACE INTO `specialties` (`id`, `name`, `specialty_type`, `source`, `created_at`, `updated_at`) VALUES 
- (1347,'Geriatric','medical',NULL, now() , NULL) 
-;
-
-
-####################################### 
-###################### ProcessProviderLocation 
+###################### Specialities 
 ####################################### 
 
 
 
 ####################################### 
-###################### ProcessProviderParticipation 
+###################### Provider Location 
+####################################### 
+
+
+
+####################################### 
+###################### Provider Participation 
 ####################################### 
 REPLACE INTO `provider_participations` (`id`, `provider_network_id`, `accepting_new_patients`, `primary_phone`, `provider_id`, `provider_role`, `facility`, `expired_at`, `updated_at`, `provider_location_id`) VALUES 
-(114100195,0,1,'(209) 384-1571',15295215,NULL,NULL,NULL,NULL,23087492) 
-,(114100196,0,1,'(916) 383-1700',15295216,NULL,NULL,NULL,NULL,23087493) 
-,(114100197,0,1,'(209) 467-1500',15295217,NULL,NULL,NULL,NULL,23087494) 
-,(114100198,0,1,'(916) 486-7555',15295218,NULL,NULL,NULL,NULL,23087495) 
-,(114100199,0,1,'(209) 549-2849',15295219,NULL,NULL,NULL,NULL,23087496) 
-,(114100200,0,1,'(916) 797-0525',15295220,NULL,NULL,NULL,NULL,23087497) 
-,(114100201,0,1,'(831) 422-5811',15295221,NULL,NULL,NULL,NULL,23087498) 
-;
+(114100195,9482,1,'(510) 652-7000',15294180,NULL,NULL,NULL,NULL,1797072) 
+,(114100196,9482,1,NULL,1998261,NULL,NULL,NULL,NULL,4986125) ;
 
 ####################################### 
-###################### ProcessProvider 
+###################### Providers 
 ####################################### 
-REPLACE INTO `providers` (`id`,`provider_type`, `medical_school`, `medical_school_graduation`, `name`, `billing_unit_name`, `friendly_name`, `gender`, `created_at`, `updated_at`, `facility_name`, `first_name`, `last_name`, `initials`, `suffix`, `years_of_experience`, `review_provider_type`) VALUES 
-(15295214,'P','Medical SchoolUniversity Of The East, 1981','1981','Maria Daisy Ilano',NULL,'Maria','Female',now() , NULL , NULL,'Maria','Ilano','Daisy',NULL,NULL,NULL) ,
-(15295215,'P','Medical SchoolTulane University, 1990','1990','Hughes, William Howard, MD',NULL,'William','Male',now() , NULL , NULL,'William','Hughes','Howard',NULL,NULL,NULL) ,
-(15295216,'P','Medical SchoolGovernment Medical College/Dayanand University, 1969','Medical SchoolGovernment Medical College/Dayanand University, 1969','Gill, Paramjit K., MD',NULL,'Paramjit','Female',now() , NULL , NULL,'Paramjit','Gill','K',NULL,NULL,NULL) ,
-(15295217,'P','Medical SchoolGovernment Medical College/Punjab University, 1971','1971','Mehtani, Janak K., MD',NULL,'Janak','Male',now() , NULL , NULL,'Janak','Mehtani','K',NULL,NULL,NULL) ,
-(15295218,'P',NULL,NULL,'Castillo, Manolito, MD',NULL,'Castillo','Male',now() , NULL , NULL,'Castillo','Manolito',NULL,NULL,NULL,NULL) ,
-(15295219,'P','Medical SchoolBeijing Medical University, 1986','1986','Yang, Chunlin, MD',NULL,'Chunlin','Female',now() , NULL , NULL,'Chunlin','Yang',NULL,NULL,NULL,NULL) ,
-(15295220,'P','Medical SchoolUniv Of Iowa, 1960','1960','Buche, Dale K., MD',NULL,'Dale','Female',now() , NULL , NULL,'Dale','Buche','K',NULL,NULL,NULL) ,;
+
 
 
 ####################################### 
-###################### ProcessProvidersSpecialities  
+###################### Providers Specialities  
 ####################################### 
-REPLACE INTO `provider_specialties` (`id`, `provider_id`, `specialty_id`, `created_at`, `updated_at`) VALUES (1,15295215,784, now() , NULL),
-(2,15295215,1343, now() , NULL),
-(3,15295215,1325, now() , NULL),
-(4,15295215,810, now() , NULL),
-(5,15295215,737, now() , NULL),
-(6,15295215,784, now() , NULL),
-(7,15295215,1343, now() , NULL),
-(8,15295215,1325, now() , NULL),
-(9,15295215,810, now() , NULL),
-(10,15295215,737, now() , NULL),
-(11,15295216,1342, now() , NULL),
-(12,15295216,1340, now() , NULL),
-(13,15295216,1343, now() , NULL),
-(14,15295216,816, now() , NULL),
-(15,15295216,820, now() , NULL),
-(16,15295216,737, now() , NULL),
-(17,15295216,824, now() , NULL),
-(18,15295215,784, now() , NULL),
-(19,15295215,1343, now() , NULL),
-(20,15295215,1325, now() , NULL),
-(21,15295215,810, now() , NULL),
-(22,15295215,737, now() , NULL),
-(23,15295216,1342, now() , NULL),
-(24,15295216,1340, now() , NULL),
-(25,15295216,1343, now() , NULL),
-(26,15295216,816, now() , NULL),
-(27,15295216,820, now() , NULL),
-(28,15295216,737, now() , NULL),
-(29,15295216,824, now() , NULL),
-(30,15295217,1340, now() , NULL),
-(31,15295217,1345, now() , NULL),
-(32,15295217,986, now() , NULL),
-(33,15295217,1344, now() , NULL),
-(34,15295217,806, now() , NULL),
-(35,15295217,1325, now() , NULL),
-(36,15295217,810, now() , NULL),
-(37,15295217,820, now() , NULL),
-(38,15295217,847, now() , NULL),
-(39,15295217,1196, now() , NULL),
-(40,15295217,737, now() , NULL),
-(41,15295217,824, now() , NULL),
-(42,15295215,784, now() , NULL),
-(43,15295215,1343, now() , NULL),
-(44,15295215,1325, now() , NULL),
-(45,15295215,810, now() , NULL),
-(46,15295215,737, now() , NULL),
-(47,15295216,1342, now() , NULL),
-(48,15295216,1340, now() , NULL),
-(49,15295216,1343, now() , NULL),
-(50,15295216,816, now() , NULL),
-(51,15295216,820, now() , NULL),
-(52,15295216,737, now() , NULL),
-(53,15295216,824, now() , NULL),
-(54,15295217,1340, now() , NULL),
-(55,15295217,1345, now() , NULL),
-(56,15295217,986, now() , NULL),
-(57,15295217,1344, now() , NULL),
-(58,15295217,806, now() , NULL),
-(59,15295217,1325, now() , NULL),
-(60,15295217,810, now() , NULL),
-(61,15295217,820, now() , NULL),
-(62,15295217,847, now() , NULL),
-(63,15295217,1196, now() , NULL),
-(64,15295217,737, now() , NULL),
-(65,15295217,824, now() , NULL),
-(66,15295218,1342, now() , NULL),
-(67,15295218,1340, now() , NULL),
-(68,15295218,798, now() , NULL),
-(69,15295218,799, now() , NULL),
-(70,15295218,1345, now() , NULL),
-(71,15295218,816, now() , NULL),
-(72,15295218,820, now() , NULL),
-(73,15295218,823, now() , NULL),
-(74,15295218,847, now() , NULL),
-(75,15295218,1196, now() , NULL),
-(76,15295218,737, now() , NULL),
-(77,15295218,1346, now() , NULL),
-(78,15295218,828, now() , NULL),
-(79,15295215,784, now() , NULL),
-(80,15295215,1343, now() , NULL),
-(81,15295215,1325, now() , NULL),
-(82,15295215,810, now() , NULL),
-(83,15295215,737, now() , NULL),
-(84,15295216,1342, now() , NULL),
-(85,15295216,1340, now() , NULL),
-(86,15295216,1343, now() , NULL),
-(87,15295216,816, now() , NULL),
-(88,15295216,820, now() , NULL),
-(89,15295216,737, now() , NULL),
-(90,15295216,824, now() , NULL),
-(91,15295217,1340, now() , NULL),
-(92,15295217,1345, now() , NULL),
-(93,15295217,986, now() , NULL),
-(94,15295217,1344, now() , NULL),
-(95,15295217,806, now() , NULL),
-(96,15295217,1325, now() , NULL),
-(97,15295217,810, now() , NULL),
-(98,15295217,820, now() , NULL),
-(99,15295217,847, now() , NULL),
-(100,15295217,1196, now() , NULL),
-(101,15295217,737, now() , NULL),
-(102,15295217,824, now() , NULL),
-(103,15295218,1342, now() , NULL),
-(104,15295218,1340, now() , NULL),
-(105,15295218,798, now() , NULL),
-(106,15295218,799, now() , NULL),
-(107,15295218,1345, now() , NULL),
-(108,15295218,816, now() , NULL),
-(109,15295218,820, now() , NULL),
-(110,15295218,823, now() , NULL),
-(111,15295218,847, now() , NULL),
-(112,15295218,1196, now() , NULL),
-(113,15295218,737, now() , NULL),
-(114,15295218,1346, now() , NULL),
-(115,15295218,828, now() , NULL),
-(116,15295219,784, now() , NULL),
-(117,15295219,737, now() , NULL),
-(118,15295219,1346, now() , NULL),
-(119,15295215,784, now() , NULL),
-(120,15295215,1343, now() , NULL),
-(121,15295215,1325, now() , NULL),
-(122,15295215,810, now() , NULL),
-(123,15295215,737, now() , NULL),
-(124,15295216,1342, now() , NULL),
-(125,15295216,1340, now() , NULL),
-(126,15295216,1343, now() , NULL),
-(127,15295216,816, now() , NULL),
-(128,15295216,820, now() , NULL),
-(129,15295216,737, now() , NULL),
-(130,15295216,824, now() , NULL),
-(131,15295217,1340, now() , NULL),
-(132,15295217,1345, now() , NULL),
-(133,15295217,986, now() , NULL),
-(134,15295217,1344, now() , NULL),
-(135,15295217,806, now() , NULL),
-(136,15295217,1325, now() , NULL),
-(137,15295217,810, now() , NULL),
-(138,15295217,820, now() , NULL),
-(139,15295217,847, now() , NULL),
-(140,15295217,1196, now() , NULL),
-(141,15295217,737, now() , NULL),
-(142,15295217,824, now() , NULL),
-(143,15295218,1342, now() , NULL),
-(144,15295218,1340, now() , NULL),
-(145,15295218,798, now() , NULL),
-(146,15295218,799, now() , NULL),
-(147,15295218,1345, now() , NULL),
-(148,15295218,816, now() , NULL),
-(149,15295218,820, now() , NULL),
-(150,15295218,823, now() , NULL),
-(151,15295218,847, now() , NULL),
-(152,15295218,1196, now() , NULL),
-(153,15295218,737, now() , NULL),
-(154,15295218,1346, now() , NULL),
-(155,15295218,828, now() , NULL),
-(156,15295219,784, now() , NULL),
-(157,15295219,737, now() , NULL),
-(158,15295219,1346, now() , NULL),
-(159,15295220,1342, now() , NULL),
-(160,15295220,1340, now() , NULL),
-(161,15295220,1345, now() , NULL),
-(162,15295220,820, now() , NULL),
-(163,15295220,847, now() , NULL),
-(164,15295220,1196, now() , NULL),
-(165,15295220,737, now() , NULL),
-(166,15295220,828, now() , NULL),
-(167,15295215,784, now() , NULL),
-(168,15295215,1343, now() , NULL),
-(169,15295215,1325, now() , NULL),
-(170,15295215,810, now() , NULL),
-(171,15295215,737, now() , NULL),
-(172,15295216,1342, now() , NULL),
-(173,15295216,1340, now() , NULL),
-(174,15295216,1343, now() , NULL),
-(175,15295216,816, now() , NULL),
-(176,15295216,820, now() , NULL),
-(177,15295216,737, now() , NULL),
-(178,15295216,824, now() , NULL),
-(179,15295217,1340, now() , NULL),
-(180,15295217,1345, now() , NULL),
-(181,15295217,986, now() , NULL),
-(182,15295217,1344, now() , NULL),
-(183,15295217,806, now() , NULL),
-(184,15295217,1325, now() , NULL),
-(185,15295217,810, now() , NULL),
-(186,15295217,820, now() , NULL),
-(187,15295217,847, now() , NULL),
-(188,15295217,1196, now() , NULL),
-(189,15295217,737, now() , NULL),
-(190,15295217,824, now() , NULL),
-(191,15295218,1342, now() , NULL),
-(192,15295218,1340, now() , NULL),
-(193,15295218,798, now() , NULL),
-(194,15295218,799, now() , NULL),
-(195,15295218,1345, now() , NULL),
-(196,15295218,816, now() , NULL),
-(197,15295218,820, now() , NULL),
-(198,15295218,823, now() , NULL),
-(199,15295218,847, now() , NULL),
-(200,15295218,1196, now() , NULL),
-(201,15295218,737, now() , NULL),
-(202,15295218,1346, now() , NULL),
-(203,15295218,828, now() , NULL),
-(204,15295219,784, now() , NULL),
-(205,15295219,737, now() , NULL),
-(206,15295219,1346, now() , NULL),
-(207,15295220,1342, now() , NULL),
-(208,15295220,1340, now() , NULL),
-(209,15295220,1345, now() , NULL),
-(210,15295220,820, now() , NULL),
-(211,15295220,847, now() , NULL),
-(212,15295220,1196, now() , NULL),
-(213,15295220,737, now() , NULL),
-(214,15295220,828, now() , NULL),
-(215,15295221,1340, now() , NULL),
-(216,15295221,1298, now() , NULL),
-(217,15295221,1345, now() , NULL),
-(218,15295221,823, now() , NULL),
-(219,15295221,1196, now() , NULL),
-(220,15295221,737, now() , NULL),
-(221,15295221,1346, now() , NULL),
-(222,15295221,828, now() , NULL),;
+REPLACE INTO `provider_specialties` (`id`, `provider_id`, `specialty_id`, `created_at`, `updated_at`) VALUES 
+(8710421,15294180,1331, now() , NULL) ,
+(8710422,1998261,1340, now() , NULL) ,
+(8710423,1998261,1342, now() , NULL) ;
 
 
 ####################################### 
-###################### ProcessProviderAffiliation 
+###################### Provider Affiliation 
 ####################################### 
 REPLACE INTO `provider_affiliations` (`id`,`provider_id`,`parent_provider_id`,`affiliation_type`,`source`,`created_at`,`updated_at` ) VALUES 
-( 1,15295215,0,'P','SKA', now() , NULL ) 
-,( 2,15295216,0,'P','SKA', now() , NULL ) 
-,( 3,15295217,0,'P','SKA', now() , NULL ) 
-,( 4,15295218,0,'P','SKA', now() , NULL ) 
-,( 5,15295219,0,'P','SKA', now() , NULL ) 
-,( 6,15295220,0,'P','SKA', now() , NULL ) 
-,( 7,15295221,0,'P','SKA', now() , NULL ) 
-;
+( 1,1998261,15294180,'NA','SKA', now() , NULL ) ;
 
 
 ####################################### 
-###################### ProcessProviderMetrics  
+###################### Provider Metrics  
 ####################################### 
-REPLACE INTO `provider_metrics` (`id`, `provider_id`, `metric_name`, `decimal_value`, `decimal_value_avg`, `string_value`, `sample_size`, `data_provided_by`, `data_date`, `created_at`, `updated_at`) VALUES(1,15295215,'SATISFACTION_RECOMMEND_HOSPITAL',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(2,15295215,'SATISFACTION_COMMUNICATION_DOCTORS',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(3,15295215,'SATISFACTION_COMMUNICATION_NURSES',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(4,15295215,'SATISFACTION_DISCHARGE_INSTRUCTIONS',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(5,15295215,'SATISFACTION_PAIN_CONTROLLED',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(6,15295215,'SATISFACTION_MEDICINES_EXPLAINED',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(7,15295215,'SATISFACTION_ROOM_CLEAN',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(8,15295215,'SATISFACTION_ROOM_QUIET',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(9,15295215,'SATISFACTION_HELP_ASAP',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(10,15295216,'SATISFACTION_RECOMMEND_HOSPITAL',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(11,15295216,'SATISFACTION_COMMUNICATION_DOCTORS',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(12,15295216,'SATISFACTION_COMMUNICATION_NURSES',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(13,15295216,'SATISFACTION_DISCHARGE_INSTRUCTIONS',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(14,15295216,'SATISFACTION_PAIN_CONTROLLED',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(15,15295216,'SATISFACTION_MEDICINES_EXPLAINED',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(16,15295216,'SATISFACTION_ROOM_CLEAN',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(17,15295216,'SATISFACTION_ROOM_QUIET',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(18,15295216,'SATISFACTION_HELP_ASAP',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(19,15295217,'SATISFACTION_RECOMMEND_HOSPITAL',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(20,15295217,'SATISFACTION_COMMUNICATION_DOCTORS',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(21,15295217,'SATISFACTION_COMMUNICATION_NURSES',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(22,15295217,'SATISFACTION_DISCHARGE_INSTRUCTIONS',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(23,15295217,'SATISFACTION_PAIN_CONTROLLED',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(24,15295217,'SATISFACTION_MEDICINES_EXPLAINED',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(25,15295217,'SATISFACTION_ROOM_CLEAN',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(26,15295217,'SATISFACTION_ROOM_QUIET',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(27,15295217,'SATISFACTION_HELP_ASAP',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(28,15295218,'SATISFACTION_RECOMMEND_HOSPITAL',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(29,15295218,'SATISFACTION_COMMUNICATION_DOCTORS',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(30,15295218,'SATISFACTION_COMMUNICATION_NURSES',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(31,15295218,'SATISFACTION_DISCHARGE_INSTRUCTIONS',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(32,15295218,'SATISFACTION_PAIN_CONTROLLED',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(33,15295218,'SATISFACTION_MEDICINES_EXPLAINED',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(34,15295218,'SATISFACTION_ROOM_CLEAN',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(35,15295218,'SATISFACTION_ROOM_QUIET',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(36,15295218,'SATISFACTION_HELP_ASAP',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(37,15295219,'SATISFACTION_RECOMMEND_HOSPITAL',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(38,15295219,'SATISFACTION_COMMUNICATION_DOCTORS',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(39,15295219,'SATISFACTION_COMMUNICATION_NURSES',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(40,15295219,'SATISFACTION_DISCHARGE_INSTRUCTIONS',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(41,15295219,'SATISFACTION_PAIN_CONTROLLED',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(42,15295219,'SATISFACTION_MEDICINES_EXPLAINED',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(43,15295219,'SATISFACTION_ROOM_CLEAN',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(44,15295219,'SATISFACTION_ROOM_QUIET',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(45,15295219,'SATISFACTION_HELP_ASAP',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(46,15295220,'SATISFACTION_RECOMMEND_HOSPITAL',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(47,15295220,'SATISFACTION_COMMUNICATION_DOCTORS',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(48,15295220,'SATISFACTION_COMMUNICATION_NURSES',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(49,15295220,'SATISFACTION_DISCHARGE_INSTRUCTIONS',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(50,15295220,'SATISFACTION_PAIN_CONTROLLED',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(51,15295220,'SATISFACTION_MEDICINES_EXPLAINED',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(52,15295220,'SATISFACTION_ROOM_CLEAN',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(53,15295220,'SATISFACTION_ROOM_QUIET',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(54,15295220,'SATISFACTION_HELP_ASAP',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(55,15295221,'SATISFACTION_RECOMMEND_HOSPITAL',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(56,15295221,'SATISFACTION_COMMUNICATION_DOCTORS',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(57,15295221,'SATISFACTION_COMMUNICATION_NURSES',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(58,15295221,'SATISFACTION_DISCHARGE_INSTRUCTIONS',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(59,15295221,'SATISFACTION_PAIN_CONTROLLED',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(60,15295221,'SATISFACTION_MEDICINES_EXPLAINED',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(61,15295221,'SATISFACTION_ROOM_CLEAN',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(62,15295221,'SATISFACTION_ROOM_QUIET',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),
-(63,15295221,'SATISFACTION_HELP_ASAP',0.0,3.0,'0','300+','CMS','January 2016', now() , NULL),;
+REPLACE INTO `provider_metrics` (`id`, `provider_id`, `metric_name`, `decimal_value`, `decimal_value_avg`, `string_value`, `sample_size`, `data_provided_by`, `data_date`, `created_at`, `updated_at`) VALUES(1,15294180,'SATISFACTION_RECOMMEND_HOSPITAL',5.0,3.0,'3','300+','CMS','January 2016', now() , NULL),
+(2,15294180,'SATISFACTION_COMMUNICATION_DOCTORS',5.0,3.0,'3','300+','CMS','January 2016', now() , NULL),
+(3,15294180,'SATISFACTION_COMMUNICATION_NURSES',3.0,3.0,'3','300+','CMS','January 2016', now() , NULL),
+(4,15294180,'SATISFACTION_DISCHARGE_INSTRUCTIONS',5.0,3.0,'3','300+','CMS','January 2016', now() , NULL),
+(5,15294180,'SATISFACTION_PAIN_CONTROLLED',3.0,3.0,'3','300+','CMS','January 2016', now() , NULL),
+(6,15294180,'SATISFACTION_MEDICINES_EXPLAINED',3.0,3.0,'3','300+','CMS','January 2016', now() , NULL),
+(7,15294180,'SATISFACTION_ROOM_CLEAN',5.0,3.0,'3','300+','CMS','January 2016', now() , NULL),
+(8,15294180,'SATISFACTION_ROOM_QUIET',5.0,3.0,'3','300+','CMS','January 2016', now() , NULL),
+(9,15294180,'SATISFACTION_HELP_ASAP',5.0,3.0,'3','300+','CMS','January 2016', now() , NULL),
+(10,1998261,'SATISFACTION_RECOMMEND_HOSPITAL',5.0,3.0,'3','300+','CMS','January 2016', now() , NULL),
+(11,1998261,'SATISFACTION_COMMUNICATION_DOCTORS',5.0,3.0,'3','300+','CMS','January 2016', now() , NULL),
+(12,1998261,'SATISFACTION_COMMUNICATION_NURSES',3.0,3.0,'3','300+','CMS','January 2016', now() , NULL),
+(13,1998261,'SATISFACTION_DISCHARGE_INSTRUCTIONS',5.0,3.0,'3','300+','CMS','January 2016', now() , NULL),
+(14,1998261,'SATISFACTION_PAIN_CONTROLLED',3.0,3.0,'3','300+','CMS','January 2016', now() , NULL),
+(15,1998261,'SATISFACTION_MEDICINES_EXPLAINED',3.0,3.0,'3','300+','CMS','January 2016', now() , NULL),
+(16,1998261,'SATISFACTION_ROOM_CLEAN',5.0,3.0,'3','300+','CMS','January 2016', now() , NULL),
+(17,1998261,'SATISFACTION_ROOM_QUIET',5.0,3.0,'3','300+','CMS','January 2016', now() , NULL),
+(18,1998261,'SATISFACTION_HELP_ASAP',5.0,3.0,'3','300+','CMS','January 2016', now() , NULL);
+
+Delete from provider_metrics where id in (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18)
 
 
 
 
 ####################################### 
-###################### ProcessPricing 
+###################### Pricing 
 ####################################### 
 use bucket_1;
-db.priceables.remove({"pm":0});
+db.priceables.remove({"pm":6907});
 db.priceables.insert([
-{"_id" : NumberLong("1"), "pm": NumberInt(0), "pp": NumberInt(114100194), "pn": NumberInt(0), "loc": [37.331787, 37.331787], "amt": NumberInt(166.0), "pl": NumberInt(83.0), "pu": NumberInt(83.0), "spe": false, "pi": NumberInt(0), "pt": "rg"},
-{"_id" : NumberLong("2"), "pm": NumberInt(0), "pp": NumberInt(114100194), "pn": NumberInt(0), "loc": [38.578876, 38.578876], "amt": NumberInt(230.0), "pl": NumberInt(115.0), "pu": NumberInt(115.0), "spe": false, "pi": NumberInt(0), "pt": "rg"},
-{"_id" : NumberLong("3"), "pm": NumberInt(0), "pp": NumberInt(114100194), "pn": NumberInt(0), "loc": [37.971115, 37.971115], "amt": NumberInt(0.0), "pl": NumberInt(0.0), "pu": NumberInt(0.0), "spe": false, "pi": NumberInt(0), "pt": "rg"},
-{"_id" : NumberLong("4"), "pm": NumberInt(0), "pp": NumberInt(114100194), "pn": NumberInt(0), "loc": [38.620903, 38.620903], "amt": NumberInt(236.0), "pl": NumberInt(118.0), "pu": NumberInt(118.0), "spe": false, "pi": NumberInt(0), "pt": "rg"},
-{"_id" : NumberLong("5"), "pm": NumberInt(0), "pp": NumberInt(114100194), "pn": NumberInt(0), "loc": [37.673325, 37.673325], "amt": NumberInt(248.0), "pl": NumberInt(124.0), "pu": NumberInt(124.0), "spe": false, "pi": NumberInt(0), "pt": "rg"},
-{"_id" : NumberLong("6"), "pm": NumberInt(0), "pp": NumberInt(114100194), "pn": NumberInt(0), "loc": [38.73273, 38.73273], "amt": NumberInt(240.0), "pl": NumberInt(120.0), "pu": NumberInt(120.0), "spe": false, "pi": NumberInt(0), "pt": "rg"},
-{"_id" : NumberLong("7"), "pm": NumberInt(0), "pp": NumberInt(114100194), "pn": NumberInt(0), "loc": [36.65858, 36.65858], "amt": NumberInt(236.0), "pl": NumberInt(118.0), "pu": NumberInt(118.0), "spe": false, "pi": NumberInt(0), "pt": "rg"}
+{"_id" : NumberLong("95011546162"), "pm": NumberInt(6907), "pp": NumberInt(114100191), "pn": NumberInt(9482), "loc": [37.81907, 37.81907], "amt": NumberInt(2168.0), "pl": NumberInt(615.0), "pu": NumberInt(1553.0), "spe": false, "pi": NumberInt(0), "pt": "rg"},
+{"_id" : NumberLong("95011546163"), "pm": NumberInt(6907), "pp": NumberInt(114100194), "pn": NumberInt(9482), "loc": [37.360424, 37.360424], "amt": NumberInt(2168.0), "pl": NumberInt(615.0), "pu": NumberInt(1553.0), "spe": false, "pi": NumberInt(0), "pt": "rg"}
 ]);

@@ -45,7 +45,7 @@ public class ProcessProviderLocation {
 			providerLocationId = providerLocationDao.findProviderLocation(rowExcel.getAddress(), rowExcel.getCity(),
 					rowExcel.getZip());
 
-			if (providerLocationId == 0)
+			if (providerLocationId == 0) {
 				query += "(" + providerLocation.getId() + ","
 						+ processString.getModifiedString(providerLocation.getStreet_address()) + ","
 						+ processString.getModifiedString(providerLocation.getStreet_address_2()) + ","
@@ -53,15 +53,14 @@ public class ProcessProviderLocation {
 						+ processString.getModifiedString(providerLocation.getState()) + "," + providerLocation.getZip()
 						+ "," + providerLocation.getLatitude() + "," + providerLocation.getLongitude() + ","
 						+ processString.getModifiedString(providerLocation.getBuilding_name()) + ", now() , NULL ),\n";
-			id++;
-			locationPresent = false;
+				id++;
+				locationPresent = false;
+			}
 		}
 
 		query = query.substring(0, query.length() - 1);
 		query += ";";
-		System.out.println("***** \nPrivider Location Query:");
-		query = locationPresent ? query : "";
-		System.out.println(query);
+		query = locationPresent ? "" : query;
 
 		return query;
 	}

@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Arrays;
-import java.util.List;
 
 import com.castlight.beans.ProviderLocation;
 
@@ -14,7 +12,7 @@ public class ProviderLocationDao {
 	public long getMaxId() {
 		long id = 1L;
 		Statement stmt = null;
-		
+
 		Connection conn = Connections.getConnection();
 		String sql = "SELECT max(id) FROM provider_locations";
 		try {
@@ -26,6 +24,13 @@ public class ProviderLocationDao {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 		return id;
@@ -66,7 +71,6 @@ public class ProviderLocationDao {
 
 		String sql = "select * from provider_locations where id= " + providerLocationById;
 
-		System.out.println("providerLocationById = "+providerLocationById);
 		try {
 			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
@@ -74,7 +78,9 @@ public class ProviderLocationDao {
 
 			while (rs.next()) {
 
-				providerLocation = new ProviderLocation(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getLong(6), rs.getFloat(7), rs.getFloat(7), rs.getString(8));
+				providerLocation = new ProviderLocation(rs.getLong(1), rs.getString(2), rs.getString(3),
+						rs.getString(4), rs.getString(5), rs.getLong(6), rs.getFloat(7), rs.getFloat(7),
+						rs.getString(8));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

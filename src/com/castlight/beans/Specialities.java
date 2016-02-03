@@ -1,11 +1,28 @@
 package com.castlight.beans;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Specialities {
 
 	private long id;
 
 	public long getId() {
 		return id;
+	}
+
+	public Specialities(){
+		
+	}
+	
+	private static Map<String, Long> speicalityNameToId = new HashMap<>();
+
+	public Map<String, Long> getSpeicalityNameTOID() {
+		return speicalityNameToId;
+	}
+
+	public void setSpeicalityNameTOID(Map<String, Long> speicalityNameTOID) {
+		Specialities.speicalityNameToId = speicalityNameTOID;
 	}
 
 	public Specialities(long id, String name, String specialty_type, String source) {
@@ -47,7 +64,7 @@ public class Specialities {
 	private String name;
 
 	private String specialty_type;
-	
+
 	public enum Specialty_Type {
 		medical, dental, bh_inpatient
 	};

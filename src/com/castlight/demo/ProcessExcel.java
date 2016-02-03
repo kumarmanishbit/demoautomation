@@ -20,7 +20,7 @@ import com.castlight.dao.ProviderParticipationDao;
 
 public class ProcessExcel {
 
-	private static List<String> excelRow = null;
+	private  List<String> excelRow = null;
 
 	public List<String> getExcelRow() {
 		return excelRow;
@@ -35,16 +35,15 @@ public class ProcessExcel {
 	}
 
 	public void setSourceExcelRow(List<SourceExcel> sourceExcelRow) {
-		this.sourceExcelRow = sourceExcelRow;
+		ProcessExcel.sourceExcelRow = sourceExcelRow;
 	}
 
 	private static List<SourceExcel> sourceExcelRow = new ArrayList<>();
 
 	public ProcessExcel() {
-		List<Providers> listOfProviders = new ArrayList<>();
 		SourceExcel sourceExcel = null;
 		try {
-			FileInputStream file = new FileInputStream(new File("demo_automation.xlsx"));
+			FileInputStream file = new FileInputStream(new File("/Users/manishk/Downloads/demo_automation.xlsx"));
 
 			// Create Workbook instance holding reference to .xlsx file
 			XSSFWorkbook workbook = new XSSFWorkbook(file);
@@ -62,7 +61,7 @@ public class ProcessExcel {
 			long id = providerDao.getMaxId();
 
 			while (rowIterator.hasNext()) {
-				id++;
+				
 				row = rowIterator.next();
 				Iterator<Cell> cellIterator = row.cellIterator();
 
@@ -89,7 +88,7 @@ public class ProcessExcel {
 
 				sourceExcel.setDoctor_Hospital("NA".equals(excelRow.get(4)) ? "NULL" : excelRow.get(4));
 
-				Integer providerId = null;
+				Integer providerId = 0;
 				if ("D".equalsIgnoreCase(sourceExcel.getDoctor_Hospital().trim())) {
 					providerId = providerDao.getProviderId(sourceExcel.getFirst_Name().trim(),
 							sourceExcel.getLast_Name().trim(), sourceExcel.getInitials().trim());
@@ -97,6 +96,7 @@ public class ProcessExcel {
 					if (providerId != 0) {
 						sourceExcel.setId(providerId);
 					} else {
+						id++;
 						sourceExcel.setId(id);
 					}
 				} else {
@@ -104,6 +104,7 @@ public class ProcessExcel {
 					if (providerId != 0) {
 						sourceExcel.setId(providerId);
 					} else {
+						id++;
 						sourceExcel.setId(id);
 					}
 				}
@@ -127,8 +128,6 @@ public class ProcessExcel {
 
 				sourceExcel.setCity("NA".equals(excelRow.get(16)) ? "NULL" : excelRow.get(16));
 
-				System.out.println("first = " + excelRow.get(1) + "zip = " + excelRow.get(17));
-
 				sourceExcel.setZip((int) Float.valueOf(excelRow.get(17).trim()).floatValue());
 
 				sourceExcel.setDistance("NA".equals(excelRow.get(18)) ? "NULL" : excelRow.get(18));
@@ -138,16 +137,12 @@ public class ProcessExcel {
 				int providerLocationID = providerLocationDao.findProviderLocation(excelRow.get(14), excelRow.get(16),
 						(int) Float.valueOf(excelRow.get(17).trim()).floatValue());
 
-				System.out.println(providerLocationID);
-
 				sourceExcel.setProviderLocationId(providerLocationID);
 
 				ProviderParticipationDao providerParticipationDao = new ProviderParticipationDao();
 
 				long providerParticipationId = providerParticipationDao.findProviderParticipation(providerLocationID,
 						4294, providerId);
-
-				System.out.println("providerParticipationId = " + providerParticipationId);
 
 				sourceExcel.setProviderParticipaionId(providerParticipationId);
 
@@ -164,9 +159,6 @@ public class ProcessExcel {
 				sourceExcel.setNumberofRatings(excelRow.get(24));
 
 				sourceExcel.setEstimated_Price("NA".equals(excelRow.get(25)) ? "$0-$0" : excelRow.get(25));
-
-				// sourceExcel.setEstimated_Price("NA".equals(excelRow.get(44))
-				// ? "$0-$0" : excelRow.get(44));
 
 				sourceExcel.setYou_Pay("NA".equals(excelRow.get(26)) ? "$0-$0" : excelRow.get(25));
 
@@ -205,12 +197,8 @@ public class ProcessExcel {
 
 				sourceExcel.setNotIncluded(excelRow.get(43));
 
-				// sourceExcel.setEstimated_Price("NA".equals(excelRow.get(44))
-				// ? "$0-$0" : excelRow.get(44));
-
 				sourceExcel.setCompanyPays(excelRow.get(45));
 
-				System.out.println("first cel = " + excelRow.get(0) + "last cell = " + excelRow.get(45));
 				sourceExcel.setDesignation(excelRow.get(46));
 				sourceExcelRow.add(sourceExcel);
 			}
@@ -220,7 +208,5 @@ public class ProcessExcel {
 		} finally {
 
 		}
-
-		// System.out.println(sourceExcelRow.size());
 	}
 }

@@ -19,14 +19,14 @@ public class ProcessPricing {
 		sourceExcel = processExcel.getSourceExcelRow();
 		Long providerNetworkId = 0L;
 
-		List<Priceable> priceableList = processPricing.getPricable(sourceExcel, providerNetworkId);
+		List<Priceable> priceableList = processPricing.getPricable(sourceExcel, providerNetworkId,0l);
 
 		String mongoQuery = new ProcessPricing().createMongoQuery(priceableList);
 		System.out.println(mongoQuery);
 	}
 
 	public String process(List<SourceExcel> sourceExcel, long procedureMappingId, long providerNetworkId) {
-		List<Priceable> priceableList = getPricable(sourceExcel, providerNetworkId);
+		List<Priceable> priceableList = getPricable(sourceExcel, providerNetworkId,procedureMappingId);
 		return createMongoQuery(priceableList);
 	}
 
@@ -51,12 +51,12 @@ public class ProcessPricing {
 		return mongoInsertStatement.toString();
 	}
 
-	public List<Priceable> getPricable(List<SourceExcel> sourceExcel, Long providerNetworkId) {
+	public List<Priceable> getPricable(List<SourceExcel> sourceExcel, Long providerNetworkId , Long procedureMappingId) {
 
 		List<Priceable> priceableObjects = new ArrayList<>();
 		SourceExcel rowExcel = null;
 
-		Long id = 0L;
+		Long id = 95011546161l;
 
 		Priceable priceable = null;
 
@@ -72,8 +72,6 @@ public class ProcessPricing {
 
 			rowExcel = iterator.next();
 
-			System.out.println("Location Id = "+rowExcel.getProviderLocationId() + "Provider Name = "+rowExcel.getProvider_Name());
-			
 			providerLocation = providerLocationDao.getProviderLocationById(rowExcel.getProviderLocationId());
 
 			String[] prices = rowExcel.getEstimated_Price().split("-");
@@ -88,7 +86,7 @@ public class ProcessPricing {
 			}
 
 			float amount = priceUppper + priceLower;
-			priceable = new Priceable(id, rowExcel.getProcedureMappingId(), rowExcel.getProviderParticipaionId(),
+			priceable = new Priceable(id, procedureMappingId, rowExcel.getProviderParticipaionId(),
 					providerNetworkId, providerLocation.getLongitude(), providerLocation.getLatitude(), amount,
 					priceLower, priceUppper);
 			priceableObjects.add(priceable);

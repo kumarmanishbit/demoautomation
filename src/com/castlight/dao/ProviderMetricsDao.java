@@ -21,9 +21,15 @@ public class ProviderMetricsDao {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return id;
 	}
-		
+
 }
