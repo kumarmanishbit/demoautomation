@@ -12,7 +12,8 @@ public class ScriptFileGenerator {
 		Writer writer = null;
 
 		try {
-			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("/Applications/XAMPP/htdocs/demoautomation/MENT-0001.sql"), "utf-8"));
+		//	writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("/Applications/XAMPP/htdocs/demoautomation/MENT-0001.sql"), "utf-8"));
+			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("MENT-0002.sql"), "utf-8"));
 			writer.write(query);
 			System.out.println("Done writing file...");
 			

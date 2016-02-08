@@ -42,6 +42,7 @@ public class ProcessProviderParticipation {
                   rowExcel.getId(), "NULL", "NULL", "NULL", providerLocationId);
          query += "(" +providersParticipation.getId() +","+providersParticipation.getProvider_network_id()+","+providersParticipation.getAccepting_new_patients()+","+providersParticipation.getPrimary_phone()+","+providersParticipation.getProvider_id()+","+providersParticipation.getProvider_role()+","+providersParticipation.getFacility()+","+providersParticipation.getExpired_at()+","+providersParticipation.getExpired_at()+","+providersParticipation.getProvider_location_id()+") \n,";
          id++;
+         rowExcel.setProviderParticipaionId(providersParticipation.getId());
       }
       query = query.substring(0, query.length() - 2);
       query += ";";

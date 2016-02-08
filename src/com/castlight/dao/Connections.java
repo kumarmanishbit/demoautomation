@@ -8,7 +8,7 @@ public class Connections {
 
 	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	static final String DB_URL = "jdbc:mysql://localhost/ventana_development";
-
+	//static final String DB_URL = "jdbc:mysql://PHX-DEMO-DEV01/ventana_phxdemodev01";
 	static final String USER = "root";
 	static final String PASS = "";
 

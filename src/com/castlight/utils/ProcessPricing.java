@@ -25,8 +25,11 @@ public class ProcessPricing {
 		System.out.println(mongoQuery);
 	}
 
-	public String process(List<SourceExcel> sourceExcel, long procedureMappingId, long providerNetworkId) {
-		List<Priceable> priceableList = getPricable(sourceExcel, providerNetworkId,procedureMappingId);
+	public String process(List<SourceExcel> sourceExcel, List<Long> procedureMappingIdList, long providerNetworkId) {
+		List<Priceable> priceableList = new ArrayList();
+		for (Long procedureMappingId : procedureMappingIdList) {
+			priceableList.addAll(getPricable(sourceExcel, providerNetworkId,procedureMappingId));
+		}
 		return createMongoQuery(priceableList);
 	}
 
@@ -56,7 +59,7 @@ public class ProcessPricing {
 		List<Priceable> priceableObjects = new ArrayList<>();
 		SourceExcel rowExcel = null;
 
-		Long id = 95011546161l;
+		Long id = 95011546172l;
 
 		Priceable priceable = null;
 

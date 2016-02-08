@@ -12,7 +12,7 @@ public class ProviderDao {
 		Statement stmt = null;
 
 		Connection conn = Connections.getConnection();
-		String sql = "SELECT max(id) FROM Providers";
+		String sql = "SELECT max(id) FROM providers";
 		try {
 			stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);

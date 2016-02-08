@@ -79,8 +79,8 @@ public class ProviderLocationDao {
 			while (rs.next()) {
 
 				providerLocation = new ProviderLocation(rs.getLong(1), rs.getString(2), rs.getString(3),
-						rs.getString(4), rs.getString(5), rs.getLong(6), rs.getFloat(7), rs.getFloat(7),
-						rs.getString(8));
+						rs.getString(4), rs.getString(5), rs.getLong(6), rs.getFloat(8), rs.getFloat(7),
+						rs.getString(9));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

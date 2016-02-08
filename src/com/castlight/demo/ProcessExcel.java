@@ -141,11 +141,6 @@ public class ProcessExcel {
 
 				ProviderParticipationDao providerParticipationDao = new ProviderParticipationDao();
 
-				long providerParticipationId = providerParticipationDao.findProviderParticipation(providerLocationID,
-						4294, providerId);
-
-				sourceExcel.setProviderParticipaionId(providerParticipationId);
-
 				sourceExcel.setPhoneNumber("NA".equals(excelRow.get(19)) ? "NULL" : excelRow.get(19));
 
 				sourceExcel.setSpecialities(excelRow.get(20));
