@@ -12,6 +12,7 @@ import com.castlight.utils.ProcessProviderAffiliation;
 import com.castlight.utils.ProcessProviderLocation;
 import com.castlight.utils.ProcessProviderMetrics;
 import com.castlight.utils.ProcessProviderParticipation;
+import com.castlight.utils.ProcessProviderRatings;
 import com.castlight.utils.ProcessProvidersSpecialities;
 import com.castlight.utils.ProcessSpecialities;
 import com.castlight.utils.ScriptFileGenerator;
@@ -62,11 +63,16 @@ public class Execution {
 		finalQuery.append("###################### Provider Metrics  \n");
 		finalQuery.append("####################################### \n");
 		finalQuery.append(new ProcessProviderMetrics().process(sourceExcel) + "\n\n\n");
+		LOGGER.info("Processing ProviderRatings");
+		finalQuery.append("\n\n####################################### \n");
+		finalQuery.append("###################### Provider Metrics  \n");
+		finalQuery.append("####################################### \n");
+		finalQuery.append(new ProcessProviderRatings().process(sourceExcel) + "\n\n\n");
 		LOGGER.info("Processing Pricing");
 		finalQuery.append("\n\n####################################### \n");
 		finalQuery.append("###################### Pricing \n");
 		finalQuery.append("####################################### \n");
-		finalQuery.append(new ProcessPricing().process(sourceExcel, procedureMappingIdList, providerNetworkId));
+	    finalQuery.append(new ProcessPricing().process(sourceExcel, procedureMappingIdList, providerNetworkId));
 		ScriptFileGenerator fileWriter = new ScriptFileGenerator();
 		fileWriter.writeToFile(finalQuery.toString());
 	}

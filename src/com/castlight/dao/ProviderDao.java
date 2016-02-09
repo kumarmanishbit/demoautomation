@@ -92,7 +92,7 @@ public class ProviderDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return 0;
 	}
 
 	public Integer getProviderId(String firstName, String lastName, String initials) {

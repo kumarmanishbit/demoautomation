@@ -70,9 +70,6 @@ public class ProcessExcel {
 					Cell cell = cellIterator.next();
 
 					switch (cell.getCellType()) {
-					case Cell.CELL_TYPE_BLANK:
-						excelRow.add("NA");
-						break;
 					default:
 						excelRow.add(fmt.formatCellValue(cell));
 
@@ -82,11 +79,11 @@ public class ProcessExcel {
 				sourceExcel = new SourceExcel();
 
 				sourceExcel.setProvider_Name(excelRow.get(0));
-				sourceExcel.setFirst_Name("NA".equals(excelRow.get(1)) ? "NULL" : excelRow.get(1));
-				sourceExcel.setLast_Name("NA".equals(excelRow.get(2)) ? "NULL" : excelRow.get(2));
-				sourceExcel.setInitials("NA".equals(excelRow.get(3)) ? "NULL" : excelRow.get(3));
+				sourceExcel.setFirst_Name("NA".equalsIgnoreCase(excelRow.get(1)) ? "NULL" : excelRow.get(1));
+				sourceExcel.setLast_Name("NA".equalsIgnoreCase(excelRow.get(2)) ? "NULL" : excelRow.get(2));
+				sourceExcel.setInitials("NA".equalsIgnoreCase(excelRow.get(3)) ? "NULL" : excelRow.get(3));
 
-				sourceExcel.setDoctor_Hospital("NA".equals(excelRow.get(4)) ? "NULL" : excelRow.get(4));
+				sourceExcel.setDoctor_Hospital("NA".equalsIgnoreCase(excelRow.get(4)) ? "NULL" : excelRow.get(4));
 
 				Integer providerId = 0;
 				if ("D".equalsIgnoreCase(sourceExcel.getDoctor_Hospital().trim())) {
@@ -109,28 +106,28 @@ public class ProcessExcel {
 					}
 				}
 
-				sourceExcel.setProvider_Type("NA".equals(excelRow.get(5)) ? "NULL" : excelRow.get(5));
-				sourceExcel.setReview_Provider_Type("NA".equals(excelRow.get(6)) ? "NULL" : excelRow.get(6));
-				sourceExcel.setSuffix("NA".equals(excelRow.get(7)) ? "NULL" : excelRow.get(7));
-				sourceExcel.setYears_Of_Experience("NA".equals(excelRow.get(8)) ? "NULL" : excelRow.get(8));
-				sourceExcel.setHospital_Name("NA".equals(excelRow.get(9)) ? "NULL" : excelRow.get(9));
-				sourceExcel.setGender("NA".equals(excelRow.get(10)) ? "NULL" : excelRow.get(10));
+				sourceExcel.setProvider_Type("NA".equalsIgnoreCase(excelRow.get(5)) ? "NULL" : excelRow.get(5));
+				sourceExcel.setReview_Provider_Type("NA".equalsIgnoreCase(excelRow.get(6)) ? "NULL" : excelRow.get(6));
+				sourceExcel.setSuffix("NA".equalsIgnoreCase(excelRow.get(7)) ? "NULL" : excelRow.get(7));
+				sourceExcel.setYears_Of_Experience("NA".equalsIgnoreCase(excelRow.get(8)) ? "NULL" : excelRow.get(8));
+				sourceExcel.setHospital_Name("NA".equalsIgnoreCase(excelRow.get(9)) ? "NULL" : excelRow.get(9));
+				sourceExcel.setGender("NA".equalsIgnoreCase(excelRow.get(10)) ? "NULL" : excelRow.get(10));
 
-				sourceExcel.setBoard_Certification("NA".equals(excelRow.get(11)) ? "NULL" : excelRow.get(11));
+				sourceExcel.setBoard_Certification("NA".equalsIgnoreCase(excelRow.get(11)) ? "NULL" : excelRow.get(11));
 
-				sourceExcel.setEducation_Associations_Publications("NA".equals(excelRow.get(12)) ? "NULL" : excelRow.get(12));
+				sourceExcel.setEducation_Associations_Publications("NA".equalsIgnoreCase(excelRow.get(12)) ? "NULL" : excelRow.get(12));
 
-				sourceExcel.setMedical_School_Graduation_Year("NA".equals(excelRow.get(13)) ? "NULL" : excelRow.get(13));
+				sourceExcel.setMedical_School_Graduation_Year("NA".equalsIgnoreCase(excelRow.get(13)) ? "NULL" : excelRow.get(13));
 
-				sourceExcel.setAddress("NA".equals(excelRow.get(14)) ? "NULL" : excelRow.get(14));
+				sourceExcel.setAddress("NA".equalsIgnoreCase(excelRow.get(14)) ? "NULL" : excelRow.get(14));
 
-				sourceExcel.setState("NA".equals(excelRow.get(15)) ? "NULL" : excelRow.get(15));
+				sourceExcel.setState("NA".equalsIgnoreCase(excelRow.get(15)) ? "NULL" : excelRow.get(15));
 
-				sourceExcel.setCity("NA".equals(excelRow.get(16)) ? "NULL" : excelRow.get(16));
+				sourceExcel.setCity("NA".equalsIgnoreCase(excelRow.get(16)) ? "NULL" : excelRow.get(16));
 
 				sourceExcel.setZip((int) Float.valueOf(excelRow.get(17).trim()).floatValue());
 
-				sourceExcel.setDistance("NA".equals(excelRow.get(18)) ? "NULL" : excelRow.get(18));
+				sourceExcel.setDistance("NA".equalsIgnoreCase(excelRow.get(18)) ? "NULL" : excelRow.get(18));
 
 				ProviderLocationDao providerLocationDao = new ProviderLocationDao();
 
@@ -141,7 +138,7 @@ public class ProcessExcel {
 
 				ProviderParticipationDao providerParticipationDao = new ProviderParticipationDao();
 
-				sourceExcel.setPhoneNumber("NA".equals(excelRow.get(19)) ? "NULL" : excelRow.get(19));
+				sourceExcel.setPhoneNumber("NA".equalsIgnoreCase(excelRow.get(19)) ? "NULL" : excelRow.get(19));
 
 				sourceExcel.setSpecialities(excelRow.get(20));
 
@@ -149,15 +146,15 @@ public class ProcessExcel {
 
 				sourceExcel.setAffilation_Type(excelRow.get(22));
 
-				sourceExcel.setPatient_Rating(excelRow.get(23));
+				sourceExcel.setPatient_Rating("NA".equalsIgnoreCase(excelRow.get(23)) ? "0.0" : excelRow.get(23));
 
-				sourceExcel.setNumberofRatings(excelRow.get(24));
+				sourceExcel.setNumberofRatings("NA".equalsIgnoreCase(excelRow.get(24)) ? "0" : excelRow.get(24));
 
-				sourceExcel.setEstimated_Price("NA".equals(excelRow.get(25)) ? "$0-$0" : excelRow.get(25));
+				sourceExcel.setEstimated_Price("NA".equalsIgnoreCase(excelRow.get(25)) ? "$0-$0" : excelRow.get(25));
 
-				sourceExcel.setYou_Pay("NA".equals(excelRow.get(26)) ? "$0-$0" : excelRow.get(25));
+				sourceExcel.setYou_Pay("NA".equalsIgnoreCase(excelRow.get(26)) ? "$0-$0" : excelRow.get(25));
 
-				sourceExcel.setOverall_Rating(excelRow.get(27));
+				sourceExcel.setOverall_Rating("NA".equalsIgnoreCase(excelRow.get(27)) ? "0.0" : excelRow.get(27));
 
 				sourceExcel.setPost_discharge_transmissionOfCarePlanToNextLevelOfCareProvider(excelRow.get(28));
 
@@ -168,23 +165,23 @@ public class ProcessExcel {
 				sourceExcel.setPostDischargeContinuingCarePlanCreated(excelRow.get(31));
 
 				sourceExcel
-						.setOverallIWouldRecommendThisProvider("NA".equals(excelRow.get(32)) ? "0" : excelRow.get(32));
+						.setOverallIWouldRecommendThisProvider("NA".equalsIgnoreCase(excelRow.get(32)) ? "0" : excelRow.get(32));
 
-				sourceExcel.setDoctorsCommunicateWell("NA".equals(excelRow.get(33)) ? "0" : excelRow.get(33));
+				sourceExcel.setDoctorsCommunicateWell("NA".equalsIgnoreCase(excelRow.get(33)) ? "0" : excelRow.get(33));
 
-				sourceExcel.setNursesCommunicateWell("NA".equals(excelRow.get(34)) ? "0" : excelRow.get(34));
+				sourceExcel.setNursesCommunicateWell("NA".equalsIgnoreCase(excelRow.get(34)) ? "0" : excelRow.get(34));
 
-				sourceExcel.setClearDischargeInstructions("NA".equals(excelRow.get(35)) ? "0" : excelRow.get(35));
+				sourceExcel.setClearDischargeInstructions("NA".equalsIgnoreCase(excelRow.get(35)) ? "0" : excelRow.get(35));
 
-				sourceExcel.setPainWellControlled("NA".equals(excelRow.get(36)) ? "0" : excelRow.get(36));
+				sourceExcel.setPainWellControlled("NA".equalsIgnoreCase(excelRow.get(36)) ? "0" : excelRow.get(36));
 
-				sourceExcel.setMedicationsExplainedBeforeGiving("NA".equals(excelRow.get(37)) ? "0" : excelRow.get(37));
+				sourceExcel.setMedicationsExplainedBeforeGiving("NA".equalsIgnoreCase(excelRow.get(37)) ? "0" : excelRow.get(37));
 
-				sourceExcel.setRoomBathroomKeptClean("NA".equals(excelRow.get(38)) ? "0" : excelRow.get(38));
+				sourceExcel.setRoomBathroomKeptClean("NA".equalsIgnoreCase(excelRow.get(38)) ? "0" : excelRow.get(38));
 
-				sourceExcel.setRoomKeptQuietAtNight("NA".equals(excelRow.get(39)) ? "0" : excelRow.get(39));
+				sourceExcel.setRoomKeptQuietAtNight("NA".equalsIgnoreCase(excelRow.get(39)) ? "0" : excelRow.get(39));
 
-				sourceExcel.setReceiveHelpQuickly("NA".equals(excelRow.get(40)) ? "0" : excelRow.get(40));
+				sourceExcel.setReceiveHelpQuickly("NA".equalsIgnoreCase(excelRow.get(40)) ? "0" : excelRow.get(40));
 
 				sourceExcel.setService(excelRow.get(41));
 
@@ -194,6 +191,7 @@ public class ProcessExcel {
 
 				sourceExcel.setCompanyPays(excelRow.get(45));
 
+			//	System.out.println(excelRow.get(1));
 				sourceExcel.setDesignation(excelRow.get(46));
 				sourceExcelRow.add(sourceExcel);
 			}
