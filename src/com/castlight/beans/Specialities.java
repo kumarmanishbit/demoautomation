@@ -1,8 +1,5 @@
 package com.castlight.beans;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Specialities {
 
 	private long id;
@@ -13,16 +10,6 @@ public class Specialities {
 
 	public Specialities(){
 		
-	}
-	
-	private static Map<String, Long> speicalityNameToId = new HashMap<>();
-
-	public Map<String, Long> getSpeicalityNameTOID() {
-		return speicalityNameToId;
-	}
-
-	public void setSpeicalityNameTOID(Map<String, Long> speicalityNameTOID) {
-		Specialities.speicalityNameToId = speicalityNameTOID;
 	}
 
 	public Specialities(long id, String name, String specialty_type, String source) {

@@ -11,16 +11,11 @@ import java.util.TreeSet;
 
 import com.castlight.beans.SourceExcel;
 import com.castlight.beans.Specialities;
+import com.castlight.beans.SpecialitiesMapper;
 import com.castlight.dao.SpecialitiesDao;
 import com.castlight.demo.ProcessExcel;
 
 public class ProcessSpecialities {
-
-
-	public static void main(String[] args) {
-		ProcessSpecialities processSpecialities = new ProcessSpecialities();
-		processSpecialities.processSpeciality("medical");
-	}
 
 	public String processSpeciality(String specialityType) {
 		List<SourceExcel> sourceExcel = new ArrayList<SourceExcel>();
@@ -73,7 +68,7 @@ public class ProcessSpecialities {
 			specialitiesMaxID++;
 		}
 
-		new Specialities().setSpeicalityNameTOID(speicalitytoId);
+		SpecialitiesMapper.getInstance().setSpeicalityNameTOID(speicalitytoId);
 		
 		
 		query = query.substring(0, query.length() - 2);

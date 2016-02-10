@@ -6,27 +6,14 @@ import java.util.List;
 
 import com.castlight.beans.Priceable;
 import com.castlight.beans.ProviderLocation;
+import com.castlight.beans.ProviderLocationMapper;
 import com.castlight.beans.SourceExcel;
 import com.castlight.dao.ProviderLocationDao;
-import com.castlight.demo.ProcessExcel;
 
 public class ProcessPricing {
-	public static void main(String[] args) {
-		List<SourceExcel> sourceExcel = new ArrayList<SourceExcel>();
-
-		ProcessPricing processPricing = new ProcessPricing();
-		ProcessExcel processExcel = new ProcessExcel();
-		sourceExcel = processExcel.getSourceExcelRow();
-		Long providerNetworkId = 0L;
-
-		List<Priceable> priceableList = processPricing.getPricable(sourceExcel, providerNetworkId,0l);
-
-		String mongoQuery = new ProcessPricing().createMongoQuery(priceableList);
-		System.out.println(mongoQuery);
-	}
 
 	public String process(List<SourceExcel> sourceExcel, List<Long> procedureMappingIdList, long providerNetworkId) {
-		List<Priceable> priceableList = new ArrayList();
+		List<Priceable> priceableList = new ArrayList<Priceable>();
 		for (Long procedureMappingId : procedureMappingIdList) {
 			priceableList.addAll(getPricable(sourceExcel, providerNetworkId,procedureMappingId));
 		}
@@ -76,7 +63,12 @@ public class ProcessPricing {
 			rowExcel = iterator.next();
 
 			providerLocation = providerLocationDao.getProviderLocationById(rowExcel.getProviderLocationId());
-
+			
+			if(providerLocation==null)
+			{
+				providerLocation = ProviderLocationMapper.getInstance().getLocationNameTOID().get(rowExcel.getId());
+			}
+			
 			String[] prices = rowExcel.getEstimated_Price().split("-");
 
 			float priceLower = 0.0f, priceUppper = 0.0f;

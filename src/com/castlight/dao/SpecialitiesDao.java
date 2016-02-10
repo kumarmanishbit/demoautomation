@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.castlight.beans.Specialities;
+import com.castlight.beans.SpecialitiesMapper;
 
 public class SpecialitiesDao {
 
@@ -44,7 +45,7 @@ public class SpecialitiesDao {
 		Connection conn = Connections.getConnection();
 		StringBuilder sb = new StringBuilder();
 		String sep = "";
-		Map<String, Long> speicalityNameToId = new Specialities().getSpeicalityNameTOID();
+		Map<String, Long> speicalityNameToId = SpecialitiesMapper.getInstance().getSpeicalityNameTOID();
 		for (String s : specialitiesName) {
 			if (speicalityNameToId.containsKey(s.trim())) {
 				listOfSpecialities.add(speicalityNameToId.get(s.trim()));

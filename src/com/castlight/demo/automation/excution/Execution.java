@@ -19,13 +19,14 @@ import com.castlight.utils.ScriptFileGenerator;
 
 public class Execution {
 
-	private final static Logger LOGGER = Logger.getLogger(Execution.class.getName()); 
+	private final static Logger LOGGER = Logger.getLogger(Execution.class.getName());
+
 	public static void main(String[] args) {
 
 		String specialityType = "medical";
 		long providerNetworkId = 9482;
-		List<Long> procedureMappingIdList = Arrays.asList(2141l,2142l,2143l,2144l,6907l,6908l);
-				
+		List<Long> procedureMappingIdList = Arrays.asList(2141l, 2142l, 2143l, 2144l, 6907l, 6908l);
+		ScriptFileGenerator fileWriter = new ScriptFileGenerator();
 
 		StringBuilder finalQuery = new StringBuilder();
 		List<SourceExcel> sourceExcel = new ProcessExcel().getSourceExcelRow();
@@ -34,46 +35,55 @@ public class Execution {
 		finalQuery.append("###################### Specialities \n");
 		finalQuery.append("####################################### \\*\n");
 		finalQuery.append(new ProcessSpecialities().process(sourceExcel, specialityType) + "\n");
+		
+		LOGGER.info("Processing Providers");
+		finalQuery.append("\n\n####################################### \n");
+		finalQuery.append("###################### Providers \n");
+		finalQuery.append("####################################### \n");
+		finalQuery.append(new ProcessProvider().process(sourceExcel) + "\n");
+		
+		LOGGER.info("Processing Providers Specialities");
+		finalQuery.append("\n\n####################################### \n");
+		finalQuery.append("###################### Providers Providers Specialities  \n");
+		finalQuery.append("####################################### \n");
+		finalQuery.append(new ProcessProvidersSpecialities().process(sourceExcel) + "\n");
+
 		LOGGER.info("Processing ProcessProviderLocation");
 		finalQuery.append("\n\n####################################### \n");
 		finalQuery.append("###################### Provider Location \n");
 		finalQuery.append("####################################### \n");
 		finalQuery.append(new ProcessProviderLocation().process(sourceExcel) + "\n");
+
+		LOGGER.info("Processing ProviderParticipation");
 		finalQuery.append("\n\n####################################### \n");
 		finalQuery.append("###################### Provider Participation \n");
 		finalQuery.append("####################################### \n");
-		LOGGER.info("Processing ProviderParticipation");
-     	finalQuery.append(new ProcessProviderParticipation().process(sourceExcel, providerNetworkId));
-		finalQuery.append("\n\n####################################### \n");
-		finalQuery.append("###################### Providers \n");
-		finalQuery.append("####################################### \n");
-		LOGGER.info("Processing ProvidersSpecialities");
-		finalQuery.append(new ProcessProvider().process(sourceExcel) + "\n");
-		finalQuery.append("\n\n####################################### \n");
-		finalQuery.append("###################### Providers Specialities  \n");
-		finalQuery.append("####################################### \n");
-		finalQuery.append(new ProcessProvidersSpecialities().process(sourceExcel) + "\n");
+		finalQuery.append(new ProcessProviderParticipation().process(sourceExcel, providerNetworkId));
+		
 		LOGGER.info("Processing ProviderAffiliation");
 		finalQuery.append("\n\n####################################### \n");
 		finalQuery.append("###################### Provider Affiliation \n");
 		finalQuery.append("####################################### \n");
 		finalQuery.append(new ProcessProviderAffiliation().process(sourceExcel) + "\n");
+		
 		LOGGER.info("Processing ProviderMetrics");
 		finalQuery.append("\n\n####################################### \n");
 		finalQuery.append("###################### Provider Metrics  \n");
 		finalQuery.append("####################################### \n");
 		finalQuery.append(new ProcessProviderMetrics().process(sourceExcel) + "\n\n\n");
+		
 		LOGGER.info("Processing ProviderRatings");
 		finalQuery.append("\n\n####################################### \n");
 		finalQuery.append("###################### Provider Metrics  \n");
 		finalQuery.append("####################################### \n");
 		finalQuery.append(new ProcessProviderRatings().process(sourceExcel) + "\n\n\n");
+		
 		LOGGER.info("Processing Pricing");
 		finalQuery.append("\n\n####################################### \n");
 		finalQuery.append("###################### Pricing \n");
 		finalQuery.append("####################################### \n");
-	    finalQuery.append(new ProcessPricing().process(sourceExcel, procedureMappingIdList, providerNetworkId));
-		ScriptFileGenerator fileWriter = new ScriptFileGenerator();
+		finalQuery.append(new ProcessPricing().process(sourceExcel, procedureMappingIdList, providerNetworkId));
+
 		fileWriter.writeToFile(finalQuery.toString());
 	}
 }

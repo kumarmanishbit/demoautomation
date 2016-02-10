@@ -1,26 +1,16 @@
 package com.castlight.utils;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import com.castlight.beans.ProviderLocation;
+import com.castlight.beans.ProviderLocationMapper;
 import com.castlight.beans.SourceExcel;
 import com.castlight.dao.ProviderLocationDao;
-import com.castlight.demo.ProcessExcel;
 
 public class ProcessProviderLocation {
-
-	public static void main(String[] args) {
-		ProcessProviderLocation providerLocation = new ProcessProviderLocation();
-		List<SourceExcel> sourceExcel = new ArrayList<SourceExcel>();
-
-		ProcessExcel processExcel = new ProcessExcel();
-
-		sourceExcel = processExcel.getSourceExcelRow();
-
-		providerLocation.process(sourceExcel);
-	}
 
 	public String process(List<SourceExcel> sourceExcel) {
 		SourceExcel rowExcel = null;
@@ -38,6 +28,9 @@ public class ProcessProviderLocation {
 		float latitude = 0.0f, longitude = 0.0f;
 
 		boolean locationPresent = true;
+		
+		Map<Long, ProviderLocation> providerLocationToId = new HashMap<>();
+		
 		while (iterator.hasNext()) {
 			rowExcel = iterator.next();
 			providerLocation = new ProviderLocation(id, rowExcel.getAddress(), rowExcel.getAddress(),
@@ -55,6 +48,9 @@ public class ProcessProviderLocation {
 						+ processString.getModifiedString(providerLocation.getBuilding_name()) + ", now() , NULL ),\n";
 				id++;
 				locationPresent = false;
+				providerLocationToId.put((Long)rowExcel.getId(),providerLocation);
+				ProviderLocationMapper.getInstance().setLocationNameTOID(providerLocationToId);
+				
 			}
 		}
 

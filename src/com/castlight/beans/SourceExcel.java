@@ -2,10 +2,8 @@ package com.castlight.beans;
 
 public class SourceExcel {
 
-
 	private long id;
 
-	
 	public long getId() {
 		return id;
 	}
@@ -15,7 +13,7 @@ public class SourceExcel {
 	}
 
 	private long providerParticipaionId;
-	
+
 	public long getProviderParticipaionId() {
 		return providerParticipaionId;
 	}
@@ -23,7 +21,7 @@ public class SourceExcel {
 	public void setProviderParticipaionId(long providerParticipaionId) {
 		this.providerParticipaionId = providerParticipaionId;
 	}
-	
+
 	private long providerLocationId;
 
 	public long getProviderLocationId() {
@@ -34,9 +32,8 @@ public class SourceExcel {
 		this.providerLocationId = providerLocationId;
 	}
 
-	
 	private long procedureMappingId;
-	
+
 	public long getProcedureMappingId() {
 		return procedureMappingId;
 	}

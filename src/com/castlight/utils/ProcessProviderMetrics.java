@@ -7,18 +7,8 @@ import java.util.List;
 import com.castlight.beans.ProviderMetrics;
 import com.castlight.beans.SourceExcel;
 import com.castlight.dao.ProviderMetricsDao;
-import com.castlight.demo.ProcessExcel;
 
 public class ProcessProviderMetrics {
-
-	public static void main(String[] args) {
-		List<SourceExcel> sourceExcel = new ArrayList<SourceExcel>();
-
-		ProcessExcel processExcel = new ProcessExcel();
-		sourceExcel = processExcel.getSourceExcelRow();
-
-		new ProcessProviderMetrics().process(sourceExcel);
-	}
 
 	public String process(List<SourceExcel> sourceExcel) {
 		long id = new ProviderMetricsDao().getMaxId();

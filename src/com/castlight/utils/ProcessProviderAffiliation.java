@@ -1,6 +1,5 @@
 package com.castlight.utils;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -8,20 +7,8 @@ import com.castlight.beans.ProviderAffiliation;
 import com.castlight.beans.SourceExcel;
 import com.castlight.dao.ProviderAffiliationDao;
 import com.castlight.dao.ProviderDao;
-import com.castlight.demo.ProcessExcel;
 
 public class ProcessProviderAffiliation {
-
-	public static void main(String[] args) {
-		List<SourceExcel> sourceExcel = new ArrayList<SourceExcel>();
-		ProcessExcel processExcel = new ProcessExcel();
-		sourceExcel = processExcel.getSourceExcelRow();
-
-		ScriptFileGenerator fileWriter = new ScriptFileGenerator();
-		if (fileWriter.writeToFile((new ProcessProviderAffiliation()).process(sourceExcel))) {
-			System.out.println("done...");
-		}
-	}
 
 	public String process(List<SourceExcel> sourceExcel) {
 		long id = new ProviderAffiliationDao().getMaxId();

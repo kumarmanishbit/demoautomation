@@ -12,7 +12,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.castlight.beans.Providers;
 import com.castlight.beans.SourceExcel;
 import com.castlight.dao.ProviderDao;
 import com.castlight.dao.ProviderLocationDao;
@@ -20,7 +19,7 @@ import com.castlight.dao.ProviderParticipationDao;
 
 public class ProcessExcel {
 
-	private  List<String> excelRow = null;
+	private List<String> excelRow = null;
 
 	public List<String> getExcelRow() {
 		return excelRow;
@@ -43,7 +42,7 @@ public class ProcessExcel {
 	public ProcessExcel() {
 		SourceExcel sourceExcel = null;
 		try {
-			FileInputStream file = new FileInputStream(new File("/Users/manishk/Downloads/demo_automation.xlsx"));
+			FileInputStream file = new FileInputStream(new File("/Users/manishk/Downloads/Excel/demo_automation.xlsx"));
 
 			// Create Workbook instance holding reference to .xlsx file
 			XSSFWorkbook workbook = new XSSFWorkbook(file);
@@ -61,7 +60,7 @@ public class ProcessExcel {
 			long id = providerDao.getMaxId();
 
 			while (rowIterator.hasNext()) {
-				
+
 				row = rowIterator.next();
 				Iterator<Cell> cellIterator = row.cellIterator();
 
@@ -70,6 +69,8 @@ public class ProcessExcel {
 					Cell cell = cellIterator.next();
 
 					switch (cell.getCellType()) {
+					case Cell.CELL_TYPE_BLANK:
+						excelRow.add("NA");
 					default:
 						excelRow.add(fmt.formatCellValue(cell));
 
@@ -115,9 +116,11 @@ public class ProcessExcel {
 
 				sourceExcel.setBoard_Certification("NA".equalsIgnoreCase(excelRow.get(11)) ? "NULL" : excelRow.get(11));
 
-				sourceExcel.setEducation_Associations_Publications("NA".equalsIgnoreCase(excelRow.get(12)) ? "NULL" : excelRow.get(12));
+				sourceExcel.setEducation_Associations_Publications(
+						"NA".equalsIgnoreCase(excelRow.get(12)) ? "NULL" : excelRow.get(12));
 
-				sourceExcel.setMedical_School_Graduation_Year("NA".equalsIgnoreCase(excelRow.get(13)) ? "NULL" : excelRow.get(13));
+				sourceExcel.setMedical_School_Graduation_Year(
+						"NA".equalsIgnoreCase(excelRow.get(13)) ? "NULL" : excelRow.get(13));
 
 				sourceExcel.setAddress("NA".equalsIgnoreCase(excelRow.get(14)) ? "NULL" : excelRow.get(14));
 
@@ -142,9 +145,10 @@ public class ProcessExcel {
 
 				sourceExcel.setSpecialities(excelRow.get(20));
 
-				sourceExcel.setParent_Provider_Name(excelRow.get(21));
+				sourceExcel
+						.setParent_Provider_Name("NA".equalsIgnoreCase(excelRow.get(21)) ? "NULL" : excelRow.get(21));
 
-				sourceExcel.setAffilation_Type(excelRow.get(22));
+				sourceExcel.setAffilation_Type("NA".equalsIgnoreCase(excelRow.get(22)) ? "NULL" : excelRow.get(22));
 
 				sourceExcel.setPatient_Rating("NA".equalsIgnoreCase(excelRow.get(23)) ? "0.0" : excelRow.get(23));
 
@@ -164,18 +168,20 @@ public class ProcessExcel {
 
 				sourceExcel.setPostDischargeContinuingCarePlanCreated(excelRow.get(31));
 
-				sourceExcel
-						.setOverallIWouldRecommendThisProvider("NA".equalsIgnoreCase(excelRow.get(32)) ? "0" : excelRow.get(32));
+				sourceExcel.setOverallIWouldRecommendThisProvider(
+						"NA".equalsIgnoreCase(excelRow.get(32)) ? "0" : excelRow.get(32));
 
 				sourceExcel.setDoctorsCommunicateWell("NA".equalsIgnoreCase(excelRow.get(33)) ? "0" : excelRow.get(33));
 
 				sourceExcel.setNursesCommunicateWell("NA".equalsIgnoreCase(excelRow.get(34)) ? "0" : excelRow.get(34));
 
-				sourceExcel.setClearDischargeInstructions("NA".equalsIgnoreCase(excelRow.get(35)) ? "0" : excelRow.get(35));
+				sourceExcel.setClearDischargeInstructions(
+						"NA".equalsIgnoreCase(excelRow.get(35)) ? "0" : excelRow.get(35));
 
 				sourceExcel.setPainWellControlled("NA".equalsIgnoreCase(excelRow.get(36)) ? "0" : excelRow.get(36));
 
-				sourceExcel.setMedicationsExplainedBeforeGiving("NA".equalsIgnoreCase(excelRow.get(37)) ? "0" : excelRow.get(37));
+				sourceExcel.setMedicationsExplainedBeforeGiving(
+						"NA".equalsIgnoreCase(excelRow.get(37)) ? "0" : excelRow.get(37));
 
 				sourceExcel.setRoomBathroomKeptClean("NA".equalsIgnoreCase(excelRow.get(38)) ? "0" : excelRow.get(38));
 
@@ -183,16 +189,15 @@ public class ProcessExcel {
 
 				sourceExcel.setReceiveHelpQuickly("NA".equalsIgnoreCase(excelRow.get(40)) ? "0" : excelRow.get(40));
 
-				sourceExcel.setService(excelRow.get(41));
+				sourceExcel.setService("NA".equalsIgnoreCase(excelRow.get(41)) ? "NULL" : excelRow.get(41));
 
-				sourceExcel.setIncluded(excelRow.get(42));
+				sourceExcel.setIncluded("NA".equalsIgnoreCase(excelRow.get(42)) ? "NULL" : excelRow.get(42));
 
-				sourceExcel.setNotIncluded(excelRow.get(43));
+				sourceExcel.setNotIncluded("NA".equalsIgnoreCase(excelRow.get(43)) ? "NULL" : excelRow.get(43));
 
-				sourceExcel.setCompanyPays(excelRow.get(45));
+				sourceExcel.setCompanyPays("NA".equalsIgnoreCase(excelRow.get(45)) ? "NULL" : excelRow.get(45));
 
-			//	System.out.println(excelRow.get(1));
-				sourceExcel.setDesignation(excelRow.get(46));
+				sourceExcel.setDesignation("NA".equalsIgnoreCase(excelRow.get(46)) ? "NULL" : excelRow.get(46));
 				sourceExcelRow.add(sourceExcel);
 			}
 			file.close();

@@ -1,29 +1,13 @@
 package com.castlight.utils;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import com.castlight.beans.Providers;
 import com.castlight.beans.SourceExcel;
 import com.castlight.dao.ProviderDao;
-import com.castlight.demo.ProcessExcel;
 
 public class ProcessProvider {
-
-	public static void main(String[] args) {
-		ProcessProvider processProvider = new ProcessProvider();
-
-		List<SourceExcel> sourceExcel = new ArrayList<SourceExcel>();
-
-		ProcessExcel processExcel = new ProcessExcel();
-		sourceExcel = processExcel.getSourceExcelRow();
-		ScriptFileGenerator fileWriter = new ScriptFileGenerator();
-		if (fileWriter.writeToFile(processProvider.process(sourceExcel))) {
-			System.out.println("done...");
-		}
-
-	}
 
 	public String process(List<SourceExcel> sourceExcel) {
 		Providers providers = null;

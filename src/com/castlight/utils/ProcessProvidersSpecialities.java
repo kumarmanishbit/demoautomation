@@ -11,21 +11,8 @@ import com.castlight.beans.ProviderSpecialities;
 import com.castlight.beans.SourceExcel;
 import com.castlight.dao.ProviderSpecialitiesDao;
 import com.castlight.dao.SpecialitiesDao;
-import com.castlight.demo.ProcessExcel;
 
 public class ProcessProvidersSpecialities {
-
-	public static void main(String[] args) {
-		List<SourceExcel> sourceExcel = new ArrayList<SourceExcel>();
-
-		ProcessProvidersSpecialities providersSpecialities = new ProcessProvidersSpecialities();
-
-		ProcessExcel processExcel = new ProcessExcel();
-		sourceExcel = processExcel.getSourceExcelRow();
-
-		providersSpecialities.process(sourceExcel);
-
-	}
 
 	public String process(List<SourceExcel> sourceExcel) {
 		SpecialitiesDao specialitiesDao = new SpecialitiesDao();

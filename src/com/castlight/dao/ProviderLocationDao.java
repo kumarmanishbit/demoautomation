@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.castlight.beans.ProviderLocation;
+import com.castlight.beans.ProviderLocationMapper;
 
 public class ProviderLocationDao {
 
@@ -70,7 +71,6 @@ public class ProviderLocationDao {
 		Connection conn = Connections.getConnection();
 
 		String sql = "select * from provider_locations where id= " + providerLocationById;
-
 		try {
 			stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
@@ -85,7 +85,7 @@ public class ProviderLocationDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		
 		return providerLocation;
 	}
 

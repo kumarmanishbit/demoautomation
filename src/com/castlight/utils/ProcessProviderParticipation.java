@@ -1,25 +1,15 @@
 package com.castlight.utils;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.castlight.beans.ProviderLocationMapper;
 import com.castlight.beans.ProviderParticipation;
 import com.castlight.beans.SourceExcel;
 import com.castlight.dao.ProviderLocationDao;
 import com.castlight.dao.ProviderParticipationDao;
-import com.castlight.demo.ProcessExcel;
 
 public class ProcessProviderParticipation {
-
-   public static void main(String[] args) {
-
-      List<SourceExcel> sourceExcel = new ArrayList<SourceExcel>();
-      sourceExcel = new ProcessExcel().getSourceExcelRow();
-
-      long providerNetworkId = 1589;
-      new ProcessProviderParticipation().process(sourceExcel, providerNetworkId);
-   }
 
    public String process(List<SourceExcel> sourceExcel, long providerNetworkId) {
       ProviderLocationDao providerLocationDao = new ProviderLocationDao();
@@ -38,6 +28,11 @@ public class ProcessProviderParticipation {
          
          providerLocationId = providerLocationDao.findProviderLocation(rowExcel.getAddress(), rowExcel.getCity(),
                   rowExcel.getZip());
+         if(providerLocationId == 0)
+         {
+        	 providerLocationId = ProviderLocationMapper.getInstance().getLocationNameTOID().get(rowExcel.getId()).getId();
+         }
+         
          providersParticipation = new ProviderParticipation(id, providerNetworkId, 1, processString.getModifiedString(rowExcel.getPhoneNumber()),
                   rowExcel.getId(), "NULL", "NULL", "NULL", providerLocationId);
          query += "(" +providersParticipation.getId() +","+providersParticipation.getProvider_network_id()+","+providersParticipation.getAccepting_new_patients()+","+providersParticipation.getPrimary_phone()+","+providersParticipation.getProvider_id()+","+providersParticipation.getProvider_role()+","+providersParticipation.getFacility()+","+providersParticipation.getExpired_at()+","+providersParticipation.getExpired_at()+","+providersParticipation.getProvider_location_id()+") \n,";
